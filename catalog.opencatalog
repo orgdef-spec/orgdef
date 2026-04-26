@@ -1,0 +1,29 @@
+{
+  "catdef": "1.4",
+  "orgdef": "0.1.0",
+  "type": "orgdef:Library",
+  "id": "orgdef-canonical-library",
+  "name": "orgdef Canonical Library",
+  "description": "The canonical library of organization-chart definitions, curated by the orgdef community. Each entry is a portable, validated org-structure specification.",
+  "version": "0.1.0",
+
+  "product": {
+    "name": "orgdef",
+    "homepage": "https://orgdef.org",
+    "repository": "https://github.com/orgdef-spec/orgdef",
+    "license": "MIT",
+    "maintainer": "orgdef community"
+  },
+
+  "data": {
+    "items": []
+  },
+
+  "metadata": {
+    "created": "2026-04-26",
+    "schema_version": "0.1.0",
+    "items_count": 0,
+    "last_updated": "2026-04-26",
+    "_comment": "This catalog is the index of all orgdef artifacts in the canonical library at orgs/. As artifacts are promoted from proposed-orgs/ to orgs/, entries are added here. The first artifact (catdef-org) is forthcoming as PR #1."
+  }
+}
