@@ -21,7 +21,7 @@
         "id": "catdef-org",
         "name": "catdef + roledef + orgdef ecosystem",
         "version": "1.0.0",
-        "description": "The organization stewarding the catdef substrate spec and the catdef-family consumer specs (roledef, orgdef, future xxxdef specs). 12 positions (1 staffed-human, 3 staffed-ai, 7 informal, 1 vacant), 25 relationships across 7 standard relationship types. First canonical orgdef artifact; first instantiation of the x.org.memo_location convention (transport-agnostic memo location declared at the org level).",
+        "description": "The organization stewarding the catdef substrate spec and the catdef-family consumer specs (roledef, orgdef, future xxxdef specs). 12 positions (1 staffed-human, 3 staffed-ai, 7 informal, 1 vacant) carry per-position x.position.working_directory extensions where applicable. 25 relationships across 7 standard relationship types. First canonical orgdef artifact; first instantiation of the per-recipient working-repo memo convention (authorization-implies-write-access discipline, transport-agnostic).",
         "file": "orgs/catdef-org.openthing",
         "added": "2026-04-26",
         "decision": "decisions/catdef-org.md"

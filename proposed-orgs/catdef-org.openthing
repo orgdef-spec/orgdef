@@ -5,13 +5,9 @@
   "id": "catdef-org",
   "name": "catdef + roledef + orgdef ecosystem",
   "version": "1.0.0",
-
   "mission": "Steward the catdef substrate spec and the catdef-family consumer specs (roledef, orgdef, future xxxdef specs) as open standards. Demonstrate empirically that AI roles can be portable across runtimes, that organizations can be machine-readable, and that the catdef substrate scales across multiple consumer specs.",
-
   "scope": "catdef substrate + roledef + orgdef + future catdef-family consumer specs (memodef, openmemo, openorg, aigp). Out of scope: AWS Thinkbox OpenJD, Oracle Open Agent Specification, chrisbarry/openagent — adjacent specs in different technical domains. Also out of scope: vendor-specific runtime tooling, single-vendor accommodations, closed-source forks.",
-
   "governance_model": "Bounded AI authority + human-maintainer ratification. AI sessions draft, validate, decide, sign off; human maintainers (currently a single human steward) hold final merge authority on every commit. Vendors do not own the spec — Anthropic, xAI, OpenAI, Google, Meta, and any future runtime are equal citizens. Pattern-promotion (recognizing emergent patterns in submissions and promoting them to spec text) is a strategist responsibility; spec-text drafting is a maintainer responsibility; canonical implementation work is a canonical-implementor responsibility; library validation is a validator responsibility — explicit role-separation is load-bearing for the bounded-authority discipline.",
-
   "positions": [
     {
       "id": "human-steward",
@@ -23,7 +19,6 @@
       },
       "description": "The single human at the apex. Final sign-off authority on every merge, version bump, governance decision, deploy, and DNS change. Authorizes AI-session work but does not author it. Routes inter-session memos by handing prompts (current state) or notifying receivers of new memos (future state)."
     },
-
     {
       "id": "senior-open-standards-strategist-abstract",
       "name": "Senior Open Standards Strategist (abstract)",
@@ -35,7 +30,6 @@
       },
       "description": "Abstract parent role. Not directly staffed — sessions instantiate via one of the derived strategist roles (catdef, roledef, orgdef). Included here for lineage transparency: catdef-strategist v2.0.0 and roledef-strategist v1.0.0 declare metadata.derived_from pointing at this abstract."
     },
-
     {
       "id": "catdef-strategist",
       "name": "catdef Strategist",
@@ -51,9 +45,9 @@
         "portable": true,
         "portable_via": "https://roledef.org/roledefs/catdef-strategist.openthing"
       },
-      "description": "Stewards the catdef substrate spec and coordinates catdef-family ecosystem decisions. Triages catdef proposals using catdef-spec/CLAUDE.md heuristics (first-matching-branch discipline). Enforces value-that-doesn't-move governance with human-ratification escalation. Drafts CA-NNN decision artifacts."
+      "description": "Stewards the catdef substrate spec and coordinates catdef-family ecosystem decisions. Triages catdef proposals using catdef-spec/CLAUDE.md heuristics (first-matching-branch discipline). Enforces value-that-doesn't-move governance with human-ratification escalation. Drafts CA-NNN decision artifacts.",
+      "x.position.working_directory": "s:/projects/catdef-spec/"
     },
-
     {
       "id": "roledef-strategist",
       "name": "roledef Strategist",
@@ -69,9 +63,9 @@
         "portable": true,
         "portable_via": "https://roledef.org/roledefs/roledef-strategist.openthing"
       },
-      "description": "Stewards the roledef consumer spec. Triages roledef library submissions against schema + additive-only invariant for derivations + dual-review pattern for production-extracted submissions. Maintains the runtime-conformance methodology (4-runtime classification per RUNTIME_AMENABILITY.md). Stewards the abstract→derived showcase pattern."
+      "description": "Stewards the roledef consumer spec. Triages roledef library submissions against schema + additive-only invariant for derivations + dual-review pattern for production-extracted submissions. Maintains the runtime-conformance methodology (4-runtime classification per RUNTIME_AMENABILITY.md). Stewards the abstract→derived showcase pattern.",
+      "x.position.working_directory": "s:/projects/roledef-spec/roledef/"
     },
-
     {
       "id": "orgdef-strategist",
       "name": "orgdef Strategist",
@@ -82,9 +76,9 @@
         "portable": false,
         "note": "No roledef yet; eventual derivation from senior-open-standards-strategist is a forward work item."
       },
-      "description": "Stewards the orgdef consumer spec. Triages orgdef library submissions against schema + roledef-reference resolution + connectedness checks. THIS artifact is its first piece of stewardship work."
+      "description": "Stewards the orgdef consumer spec. Triages orgdef library submissions against schema + roledef-reference resolution + connectedness checks. THIS artifact is its first piece of stewardship work.",
+      "x.position.working_directory": "s:/projects/orgdef-spec/orgdef/"
     },
-
     {
       "id": "catdef-maintainer",
       "name": "catdef Maintainer",
@@ -95,9 +89,9 @@
         "portable": false,
         "note": "Per catdef-spec/CLAUDE.md the maintainer role is defined; the role's incumbent has not been formally roledef-extracted. Future work item."
       },
-      "description": "Drafts catdef spec text (CATDEF_SPEC.md, CATIO_SPEC.md, MCP_REFERENCE.md). Processes feedback. Runs editorial passes. Operates per catdef-spec/CLAUDE.md operating manual. Bounded authority — drafts, doesn't merge."
+      "description": "Drafts catdef spec text (CATDEF_SPEC.md, CATIO_SPEC.md, MCP_REFERENCE.md). Processes feedback. Runs editorial passes. Operates per catdef-spec/CLAUDE.md operating manual. Bounded authority — drafts, doesn't merge.",
+      "x.position.working_directory": "s:/projects/catdef-spec/"
     },
-
     {
       "id": "roledef-maintainer",
       "name": "roledef Maintainer",
@@ -106,9 +100,9 @@
         "kind": "ai",
         "session_arc": "Currently no dedicated maintainer; roledef-strategist has done maintainer work in delegated capacity (drafting README, CONTRIBUTING, CLAUDE, WRAPPER_PROMPT, RUNTIME_AMENABILITY, SCHEMA edits)."
       },
-      "description": "Drafts roledef spec text. Processes feedback. Runs editorial passes. Operates per roledef CLAUDE.md."
+      "description": "Drafts roledef spec text. Processes feedback. Runs editorial passes. Operates per roledef CLAUDE.md.",
+      "x.position.working_directory": "s:/projects/roledef-spec/roledef/"
     },
-
     {
       "id": "orgdef-maintainer",
       "name": "orgdef Maintainer",
@@ -117,9 +111,9 @@
         "kind": "ai",
         "session_arc": "Currently no dedicated maintainer; orgdef-strategist has done maintainer work in delegated capacity (drafting orgdef SCHEMA, CONTRIBUTING, CLAUDE, README during the v0.1 bootstrap)."
       },
-      "description": "Drafts orgdef spec text. Processes feedback. Runs editorial passes."
+      "description": "Drafts orgdef spec text. Processes feedback. Runs editorial passes.",
+      "x.position.working_directory": "s:/projects/orgdef-spec/orgdef/"
     },
-
     {
       "id": "roledef-validator",
       "name": "roledef Validator",
@@ -133,9 +127,9 @@
         "kind": "ai",
         "session_arc": "No dedicated validator session running; roledef-strategist self-validates in validator capacity per the validator-vs-strategist role-overlap acknowledged in decision artifacts. Validator-as-CI-step automation is a Known Work Item that would close this overlap."
       },
-      "description": "Validates submitted roledefs against SCHEMA.md. Produces structured PASS / PASS WITH NOTES / FAIL reports. Schema-conformance only — library-fit calls are strategist scope."
+      "description": "Validates submitted roledefs against SCHEMA.md. Produces structured PASS / PASS WITH NOTES / FAIL reports. Schema-conformance only — library-fit calls are strategist scope.",
+      "x.position.working_directory": "s:/projects/roledef-spec/roledef/"
     },
-
     {
       "id": "roledef-contributor",
       "name": "roledef Contributor",
@@ -151,7 +145,6 @@
       },
       "description": "Authors roledef submissions. Self-extraction by the role's incumbent is the strongest source-material pattern. Production-extraction (behavioral capture from a live AI product) requires dual-review per the established policy."
     },
-
     {
       "id": "catdef-canonical-implementor",
       "name": "catdef Canonical Implementor",
@@ -162,74 +155,208 @@
         "portable": false,
         "note": "Role exists informally per the catdef.org PR sequence; eventual self-extraction into a canonical roledef is a forward work item from strategist memory."
       },
-      "description": "Owns ecosystem-service code (catdef.org Worker, render.catdef.org renderer + /fetch proxy, future ecosystem services at catdef.org subdomains). Receives handoffs from strategist via prompt-and-paste (current) or memo (forthcoming via this org's x.org.memo_location). Bounded authority — drafts code, opens PRs, does not deploy or merge."
+      "description": "Owns ecosystem-service code (catdef.org Worker, render.catdef.org renderer + /fetch proxy, future ecosystem services at catdef.org subdomains). Receives handoffs from strategist via prompt-and-paste (current) or memo (forthcoming via this org's x.org.memo_location). Bounded authority — drafts code, opens PRs, does not deploy or merge.",
+      "x.position.working_directory": "s:/projects/catdef.org/"
     },
-
     {
       "id": "reference-implementor",
       "name": "Reference Implementor",
       "status": "vacant",
-      "description": "Maintains canonical reference data in catdef-spec/canonical/ and builds reference implementations (planned: MCP server). Defined per catdef-spec/CLAUDE.md but not currently staffed; the planned MCP server is upcoming work."
+      "description": "Maintains canonical reference data in catdef-spec/canonical/ and builds reference implementations (planned: MCP server). Defined per catdef-spec/CLAUDE.md but not currently staffed; the planned MCP server is upcoming work.",
+      "x.position.working_directory": "s:/projects/catdef-spec/"
     }
   ],
-
   "relationships": [
-    { "type": "reports_to", "from": "catdef-strategist", "to": "human-steward", "description": "Drafts catdef governance decisions and signs off; human steward merges. No autonomous merge authority." },
-    { "type": "reports_to", "from": "roledef-strategist", "to": "human-steward", "description": "Drafts roledef library decisions and signs off; human steward merges." },
-    { "type": "reports_to", "from": "orgdef-strategist", "to": "human-steward", "description": "Drafts orgdef library decisions and signs off; human steward merges." },
-    { "type": "reports_to", "from": "catdef-maintainer", "to": "human-steward", "description": "Drafts catdef spec text per strategist build directives; human steward merges." },
-    { "type": "reports_to", "from": "roledef-maintainer", "to": "human-steward", "description": "Drafts roledef spec text; human steward merges." },
-    { "type": "reports_to", "from": "orgdef-maintainer", "to": "human-steward", "description": "Drafts orgdef spec text; human steward merges." },
-    { "type": "reports_to", "from": "catdef-canonical-implementor", "to": "human-steward", "description": "Drafts ecosystem-service code (catdef.org Worker, etc.); human steward merges and deploys." },
-    { "type": "reports_to", "from": "reference-implementor", "to": "human-steward", "description": "Maintains canonical reference data; human steward merges." },
-
-    { "type": "derives_from", "from": "catdef-strategist", "to": "senior-open-standards-strategist-abstract", "description": "catdef-strategist v2.0.0 declares metadata.derived_from pointing at senior-open-standards-strategist v1.0.0. Retrofit derivation per the post-hoc abstraction pattern." },
-    { "type": "derives_from", "from": "roledef-strategist", "to": "senior-open-standards-strategist-abstract", "description": "roledef-strategist v1.0.0 declares metadata.derived_from pointing at senior-open-standards-strategist v1.0.0. Authored AS a derivation from the start." },
-
-    { "type": "peer_of", "from": "catdef-strategist", "to": "roledef-strategist", "description": "Sister strategist roles; both children of senior-open-standards-strategist. Both currently played by the same session arc; role-separation acknowledged in decision artifacts.", "bidirectional": true },
-    { "type": "peer_of", "from": "catdef-strategist", "to": "orgdef-strategist", "description": "Sister strategist roles in the catdef-family ecosystem.", "bidirectional": true },
-    { "type": "peer_of", "from": "roledef-strategist", "to": "orgdef-strategist", "description": "Sister strategist roles in the catdef-family ecosystem.", "bidirectional": true },
-    { "type": "peer_of", "from": "catdef-maintainer", "to": "roledef-maintainer", "description": "Sister maintainer roles in the catdef-family ecosystem.", "bidirectional": true },
-    { "type": "peer_of", "from": "catdef-maintainer", "to": "orgdef-maintainer", "description": "Sister maintainer roles.", "bidirectional": true },
-    { "type": "peer_of", "from": "roledef-maintainer", "to": "orgdef-maintainer", "description": "Sister maintainer roles.", "bidirectional": true },
-
-    { "type": "drafts_for", "from": "catdef-maintainer", "to": "catdef-strategist", "description": "Maintainer drafts catdef spec text per strategist build directives. Strategist's catdef_build_directive output_contract entry is the handoff shape." },
-    { "type": "drafts_for", "from": "roledef-maintainer", "to": "roledef-strategist", "description": "Maintainer drafts roledef spec text per strategist directives." },
-    { "type": "drafts_for", "from": "orgdef-maintainer", "to": "orgdef-strategist", "description": "Maintainer drafts orgdef spec text per strategist directives." },
-
-    { "type": "implements_for", "from": "catdef-canonical-implementor", "to": "catdef-strategist", "description": "Implementor delivers ecosystem-service code per strategist handoff prompts. Strategist scopes work; implementor builds; strategist signs off PRs." },
-    { "type": "implements_for", "from": "reference-implementor", "to": "catdef-strategist", "description": "Reference-implementor delivers canonical reference data per strategist directives." },
-
-    { "type": "validates_for", "from": "roledef-validator", "to": "roledef-contributor", "description": "Validator schema-checks contributor submissions. PASS/PASS-with-notes/FAIL output is one input to strategist library-fit calls." },
-
-    { "type": "coordinates_with", "from": "catdef-strategist", "to": "roledef-strategist", "description": "When consumer-spec needs require substrate change, catdef-strategist holds substrate-side authority; roledef-strategist proposes the consumer-side need.", "bidirectional": true },
-    { "type": "coordinates_with", "from": "catdef-strategist", "to": "orgdef-strategist", "description": "Same substrate-vs-consumer coordination for orgdef.", "bidirectional": true },
-    { "type": "coordinates_with", "from": "roledef-strategist", "to": "orgdef-strategist", "description": "Cross-consumer-spec coordination (e.g., orgdef positions reference roledefs by id+version+url; spec-shape changes affecting that contract require both sides).", "bidirectional": true }
+    {
+      "type": "reports_to",
+      "from": "catdef-strategist",
+      "to": "human-steward",
+      "description": "Drafts catdef governance decisions and signs off; human steward merges. No autonomous merge authority."
+    },
+    {
+      "type": "reports_to",
+      "from": "roledef-strategist",
+      "to": "human-steward",
+      "description": "Drafts roledef library decisions and signs off; human steward merges."
+    },
+    {
+      "type": "reports_to",
+      "from": "orgdef-strategist",
+      "to": "human-steward",
+      "description": "Drafts orgdef library decisions and signs off; human steward merges."
+    },
+    {
+      "type": "reports_to",
+      "from": "catdef-maintainer",
+      "to": "human-steward",
+      "description": "Drafts catdef spec text per strategist build directives; human steward merges."
+    },
+    {
+      "type": "reports_to",
+      "from": "roledef-maintainer",
+      "to": "human-steward",
+      "description": "Drafts roledef spec text; human steward merges."
+    },
+    {
+      "type": "reports_to",
+      "from": "orgdef-maintainer",
+      "to": "human-steward",
+      "description": "Drafts orgdef spec text; human steward merges."
+    },
+    {
+      "type": "reports_to",
+      "from": "catdef-canonical-implementor",
+      "to": "human-steward",
+      "description": "Drafts ecosystem-service code (catdef.org Worker, etc.); human steward merges and deploys."
+    },
+    {
+      "type": "reports_to",
+      "from": "reference-implementor",
+      "to": "human-steward",
+      "description": "Maintains canonical reference data; human steward merges."
+    },
+    {
+      "type": "derives_from",
+      "from": "catdef-strategist",
+      "to": "senior-open-standards-strategist-abstract",
+      "description": "catdef-strategist v2.0.0 declares metadata.derived_from pointing at senior-open-standards-strategist v1.0.0. Retrofit derivation per the post-hoc abstraction pattern."
+    },
+    {
+      "type": "derives_from",
+      "from": "roledef-strategist",
+      "to": "senior-open-standards-strategist-abstract",
+      "description": "roledef-strategist v1.0.0 declares metadata.derived_from pointing at senior-open-standards-strategist v1.0.0. Authored AS a derivation from the start."
+    },
+    {
+      "type": "peer_of",
+      "from": "catdef-strategist",
+      "to": "roledef-strategist",
+      "description": "Sister strategist roles; both children of senior-open-standards-strategist. Both currently played by the same session arc; role-separation acknowledged in decision artifacts.",
+      "bidirectional": true
+    },
+    {
+      "type": "peer_of",
+      "from": "catdef-strategist",
+      "to": "orgdef-strategist",
+      "description": "Sister strategist roles in the catdef-family ecosystem.",
+      "bidirectional": true
+    },
+    {
+      "type": "peer_of",
+      "from": "roledef-strategist",
+      "to": "orgdef-strategist",
+      "description": "Sister strategist roles in the catdef-family ecosystem.",
+      "bidirectional": true
+    },
+    {
+      "type": "peer_of",
+      "from": "catdef-maintainer",
+      "to": "roledef-maintainer",
+      "description": "Sister maintainer roles in the catdef-family ecosystem.",
+      "bidirectional": true
+    },
+    {
+      "type": "peer_of",
+      "from": "catdef-maintainer",
+      "to": "orgdef-maintainer",
+      "description": "Sister maintainer roles.",
+      "bidirectional": true
+    },
+    {
+      "type": "peer_of",
+      "from": "roledef-maintainer",
+      "to": "orgdef-maintainer",
+      "description": "Sister maintainer roles.",
+      "bidirectional": true
+    },
+    {
+      "type": "drafts_for",
+      "from": "catdef-maintainer",
+      "to": "catdef-strategist",
+      "description": "Maintainer drafts catdef spec text per strategist build directives. Strategist's catdef_build_directive output_contract entry is the handoff shape."
+    },
+    {
+      "type": "drafts_for",
+      "from": "roledef-maintainer",
+      "to": "roledef-strategist",
+      "description": "Maintainer drafts roledef spec text per strategist directives."
+    },
+    {
+      "type": "drafts_for",
+      "from": "orgdef-maintainer",
+      "to": "orgdef-strategist",
+      "description": "Maintainer drafts orgdef spec text per strategist directives."
+    },
+    {
+      "type": "implements_for",
+      "from": "catdef-canonical-implementor",
+      "to": "catdef-strategist",
+      "description": "Implementor delivers ecosystem-service code per strategist handoff prompts. Strategist scopes work; implementor builds; strategist signs off PRs."
+    },
+    {
+      "type": "implements_for",
+      "from": "reference-implementor",
+      "to": "catdef-strategist",
+      "description": "Reference-implementor delivers canonical reference data per strategist directives."
+    },
+    {
+      "type": "validates_for",
+      "from": "roledef-validator",
+      "to": "roledef-contributor",
+      "description": "Validator schema-checks contributor submissions. PASS/PASS-with-notes/FAIL output is one input to strategist library-fit calls."
+    },
+    {
+      "type": "coordinates_with",
+      "from": "catdef-strategist",
+      "to": "roledef-strategist",
+      "description": "When consumer-spec needs require substrate change, catdef-strategist holds substrate-side authority; roledef-strategist proposes the consumer-side need.",
+      "bidirectional": true
+    },
+    {
+      "type": "coordinates_with",
+      "from": "catdef-strategist",
+      "to": "orgdef-strategist",
+      "description": "Same substrate-vs-consumer coordination for orgdef.",
+      "bidirectional": true
+    },
+    {
+      "type": "coordinates_with",
+      "from": "roledef-strategist",
+      "to": "orgdef-strategist",
+      "description": "Cross-consumer-spec coordination (e.g., orgdef positions reference roledefs by id+version+url; spec-shape changes affecting that contract require both sides).",
+      "bidirectional": true
+    }
   ],
-
   "metadata": {
-    "authors": ["roledef-strategist <roledef-strategist@roledef.org>"],
+    "authors": [
+      "roledef-strategist <roledef-strategist@roledef.org>"
+    ],
     "license": "MIT",
     "created": "2026-04-26",
-    "extracted_from": "Self-extraction by the orgdef-strategist incumbent (currently the same session arc as catdef-strategist and roledef-strategist; role-separation acknowledged). Sources: (1) catdef-spec/CLAUDE.md role definitions for catdef-maintainer, reference-implementor, AI-maintainer; (2) roledef CLAUDE.md + CONTRIBUTING.md role definitions for roledef-maintainer, roledef-validator, roledef-contributor, roledef-strategist; (3) the recently-published roledef library (8 roledefs as of 2026-04-26: roledef-contributor v1.0.0, roledef-validator v1.0.0, catdef-strategist v2.0.0, senior-jaded-vc-associate v1.0.0, blackhat-tester v1.0.0, sncro-blackhat-tester v1.0.0, senior-open-standards-strategist v1.0.0, roledef-strategist v1.0.0); (4) the catdef.org PR sequence (#1, #2, #3, in-flight #4) which surfaced the catdef-canonical-implementor role; (5) the strategist memory file for cross-cutting context; (6) the orgdef SCHEMA.md authored alongside this artifact. Provenance audit: EXTRACTED — every position and relationship in this artifact comes from documented role definitions in CLAUDE.md / CONTRIBUTING.md / roledef library / catdef.org PRs; no positions invented. FRAMING — the org's mission/scope/governance descriptions are sharpenings consistent with documented practice but not verbatim from any single source. FORMALIZATION — the relationship typing (reports_to / peer_of / derives_from / drafts_for / implements_for / validates_for / coordinates_with) is the orgdef SCHEMA.md standard relationship type set applied to documented role-relationships; this artifact is the first concrete instantiation of that schema. The x.org.memo_location declaration is the first-instance application of an emerging memo-convention pattern that was articulated by the human steward in conversation 2026-04-26 (transport-vs-content separation; memos as catdef things via x.memo.* extensions; transport mechanism agnostic — local filesystem today, MCP-as-notification future). OUT-OF-SCOPE — adjacent specs (AWS Thinkbox OpenJD, Oracle Open Agent Specification, chrisbarry/openagent) referenced for distinguishability but not part of this org; future catdef-family consumer specs (memodef, openmemo, openorg, aigp) referenced as anticipated but not yet bootstrapped.",
+    "extracted_from": "Self-extraction by the orgdef-strategist incumbent (currently the same session arc as catdef-strategist and roledef-strategist; role-separation acknowledged). Sources: (1) catdef-spec/CLAUDE.md role definitions for catdef-maintainer, reference-implementor, AI-maintainer; (2) roledef CLAUDE.md + CONTRIBUTING.md role definitions for roledef-maintainer, roledef-validator, roledef-contributor, roledef-strategist; (3) the recently-published roledef library (8 roledefs as of 2026-04-26: roledef-contributor v1.0.0, roledef-validator v1.0.0, catdef-strategist v2.0.0, senior-jaded-vc-associate v1.0.0, blackhat-tester v1.0.0, sncro-blackhat-tester v1.0.0, senior-open-standards-strategist v1.0.0, roledef-strategist v1.0.0); (4) the catdef.org PR sequence (#1, #2, #3, #4, in-flight #5) which surfaced the catdef-canonical-implementor role; (5) the strategist memory file for cross-cutting context; (6) the orgdef SCHEMA.md authored alongside this artifact. Provenance audit: EXTRACTED — every position and relationship comes from documented role definitions in CLAUDE.md / CONTRIBUTING.md / roledef library / catdef.org PRs; no positions invented. Per-position x.position.working_directory values are extracted from the actual repo locations each position operates from (s:/projects/catdef-spec/ for catdef-* roles; s:/projects/roledef-spec/roledef/ for roledef-* roles; s:/projects/orgdef-spec/orgdef/ for orgdef-* roles; s:/projects/catdef.org/ for catdef-canonical-implementor). FRAMING — the org's mission/scope/governance descriptions are sharpenings consistent with documented practice but not verbatim from any single source. The 'authorization-implies-write-access' framing of the memo convention's design rationale was articulated by the human steward 2026-04-26 in the conversation that surfaced the original convention design and its correction (initial draft proposed central s:/memos/; refined to per-recipient working-repo/memos/ during pre-merge review). FORMALIZATION — the relationship typing is the orgdef SCHEMA.md standard relationship type set applied to documented role-relationships. The x.org.memo_location convention declaration captures the corrected per-recipient pattern in machine-readable form. The x.position.working_directory extension on positions is an emerging convention used here; eventual promotion to a SHOULD-pattern in orgdef SCHEMA.md is anticipated when 2+ orgs use it consistently. The x.org.memo_extension_namespace specification is the first concrete schema for memo .openthing artifacts; eventually anticipated to be promoted to a memodef:Memo namespaced type in a future memodef-spec consumer-spec when patterns crystallize. OUT-OF-SCOPE — adjacent specs (AWS Thinkbox OpenJD, Oracle Open Agent Specification, chrisbarry/openagent) referenced for distinguishability but not part of this org; future catdef-family consumer specs (memodef, openmemo, openorg, aigp) referenced as anticipated but not yet bootstrapped.",
     "extends": null,
-    "related": ["roledef-spec/roledef library (sister consumer-spec library)", "catdef-spec (substrate spec)", "catdef.org (ecosystem-services repo)", "render.catdef.org (rendering service)"],
+    "related": [
+      "roledef-spec/roledef library (sister consumer-spec library)",
+      "catdef-spec (substrate spec)",
+      "catdef.org (ecosystem-services repo)",
+      "render.catdef.org (rendering service)"
+    ],
     "homepage": "https://orgdef.org/orgs/catdef-org",
     "repository": "https://github.com/orgdef-spec/orgdef/blob/main/orgs/catdef-org.openthing",
     "history": [
       {
         "version": "1.0.0",
         "date": "2026-04-26",
-        "change": "Initial self-extraction by the orgdef-strategist incumbent. First orgdef artifact in canonical. Establishes catdef-org as the formally-described organization stewarding catdef + roledef + orgdef + future catdef-family consumer specs. Includes 12 positions (1 staffed-human, 3 staffed-ai, 8 informal/vacant), 24 relationships across 7 standard relationship types, and the first instantiation of the x.org.memo_location convention (transport-agnostic memo location declared at the org level)."
+        "change": "Initial self-extraction by the orgdef-strategist incumbent. First orgdef artifact in canonical. Establishes catdef-org as the formally-described organization stewarding catdef + roledef + orgdef + future catdef-family consumer specs. Includes 12 positions (1 staffed-human, 3 staffed-ai, 7 informal/vacant), 25 relationships across 7 standard relationship types, the first instantiation of the x.org.memo_location convention (per-recipient working-repo/memos/, articulated via authorization-implies-write-access discipline), and per-position x.position.working_directory extensions enabling the memo convention. The memo convention's first form (in initial draft) had a single central s:/memos/ location; pre-merge review by the human steward surfaced the authorization-implies-write-access principle, leading to the corrected per-recipient convention shipped here as v1.0.0. The corrected design ships right first time; no v1.0.1 retrofit needed."
       }
     ]
   },
-
   "x.org.memo_location": {
-    "description": "Filesystem path where this organization's memos live. Memos are catdef .openthing artifacts addressed via x.memo.from / x.memo.to / x.memo.subject extensions. Initially flat directory; if/when memo traffic warrants, may organize into subdirectories. The memo location is intentionally local (not in any git repo) so that memo content stays on the steward's filesystem regardless of which transport (local-filesystem-today, MCP-as-notification-future, SMTP, RSS, file-watcher) carries the notification. This separates transport from content per the design articulated 2026-04-26: transport is swappable; memo content lives where the steward controls it.",
-    "value": "s:/memos/"
+    "description": "Convention for memo addressing in this organization. A memo to position X lives in X's working repo at ./memos/, named YYYY-MM-DD-HHMM--<from>--<to>--<short-subject>.openthing. The recipient's working repo is the value of the position's x.position.working_directory extension. This enforces authorization-implies-write-access: a sender must have git/filesystem write access to the recipient's repo to send them a memo, mirroring the model of PR-based code review. The recipient checks their own repo's ./memos/ at session start (or via future automated notification: file-watcher, MCP-as-notification push, RSS feed, etc.). Transport is intentionally separate from content — the human steward currently notifies recipients of new memos manually; future automation replaces the transport layer without changing this content layer. Replies live in the original sender's working repo at ./memos/, with x.memo.in_reply_to set to the predecessor memo's filename. Positions without an x.position.working_directory extension (typically the human-steward and abstract roles) are not directly memo-addressable; senders address those positions via human-steward-as-router or by writing to a position the recipient operates from.",
+    "convention": "<recipient_position.x.position.working_directory>/memos/",
+    "design_rationale": "Authorization-implies-write-access (articulated by the human steward 2026-04-26 during PR #1 review). Belt and suspenders: (1) sender's authority to direct recipient is structurally enforced by repo permissions; (2) recipient checks one place (their own repo) at session start, no foreign locations to monitor; (3) memo + work + git history are co-located for natural audit trail; (4) no central /memos/ to corrupt or lose; (5) cross-repo memos require explicit cross-repo authorization, naturally limiting org-wide ('all') broadcasts to high-authority senders.",
+    "all_addressing": "x.memo.to: 'all' is acceptable but requires the sender to write the memo to every applicable position's inbox (which means having write access to all those repos — typically only the human-steward or a strategist with broad scope). The friction is a feature: it naturally limits 'all' memos to legitimate org-wide announcements."
   },
-
   "x.org.memo_extension_namespace": {
     "description": "Convention for the x.memo.* extension namespace used on memo .openthing artifacts in this org's memo location. Initially informal (no formal memodef spec yet); a future memodef-spec/memodef consumer-spec is anticipated to formalize when patterns crystallize from real use. Naive agents reading this org's memos: each memo is an .openthing with the fields below in addition to standard catdef envelope fields.",
     "value": {
@@ -271,7 +398,6 @@
       }
     }
   },
-
   "x.org.notes": {
     "description": "Operational notes about this org that don't fit cleanly into positions or relationships.",
     "value": [
