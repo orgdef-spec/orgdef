@@ -1,0 +1,153 @@
+{
+  "catdef": "1.4",
+  "orgdef": "0.3.0",
+  "type": "orgdef:Organization",
+  "id": "aigp-family-open-standard",
+  "name": "AIGP-Family Open Standard (Canonical Template)",
+  "version": "1.0.0",
+
+  "mission": "[SLOT: 1–2 sentences stating what THIS spec defines and the open machine-readable artifact it produces. Example shape: 'Define X in an open, machine-readable way that bootstraps any AI worker into Y with zero context backfill.']",
+
+  "vision": "Part of the AI Governance Pattern (AIGP) family — alongside catdef, roledef, orgdef, and memodef — defining the pattern of [SLOT: what aspect of AI-first organization this spec addresses]. The primary reader of [SLOT: this spec's primary artifact type] is an AI, including AIs in adjacent organizations: when stakeholders engage with this spec's artifacts, they may exchange them as the introduction artifact between organizations.",
+
+  "scope": "[SLOT: scope statement — what this spec covers and explicitly excludes. Reference adjacent AIGP-family specs and what's out of scope. Example shape: 'The X schema, conformance test suite, canonical-X library, and reference implementations. Out of scope: enforcing what consumers build (content-neutral), runtime infrastructure (specification only), substrate-level concerns belonging to catdef.']",
+
+  "governance_model": "Bounded AI authority + human Director ratification. The [SLOT: spec-name]-strategist (AI role) holds delegated authority for design decisions; the [SLOT: spec-name]-maintainer (AI role, separate seat) drafts spec text and conformance fixtures; the human Director holds final tiebreaker authority on every merge, version bump, and governance change. Mirrors the catdef-family pattern.",
+
+  "values": [
+    {
+      "name": "openness",
+      "description": "[SLOT: spec-name] is fundamentally open — a pattern, not a product. No vendor lock-in, no privileged implementer, no proprietary extensions in the core spec. All AI runtimes (Anthropic, OpenAI, xAI, Google, future) are equal citizens.",
+      "rationale": "Adoption depends on equal-citizen treatment of all implementers; vendor capture would defeat the standard's purpose. Forks are welcome — anyone can publish their own [SLOT: spec-name] library at any URL using the same format."
+    },
+    {
+      "name": "completeness",
+      "description": "[SLOT: spec's primary artifact bundle — e.g., 'the orgdef + roledef + job bundle' for orgdef; 'the roledef bundle' for roledef] MUST be sufficient that a fresh AI runtime loaded with the bundle [SLOT: becomes the X / can perform Y / etc.], with zero context backfill.",
+      "rationale": "Hallucination-prevention rule, not aesthetic preference. The primary reader is a machine; null context invites confabulation. A [SLOT: artifact-class] missing required structural content forces the AI to either guess or ask the user, which violates the zero-friction bar."
+    }
+  ],
+
+  "red_lines": [
+    {
+      "rule": "No NULL-context [SLOT: spec's primary artifact type] accepted by the spec, the validator, or the canonical [SLOT: spec-specific facilitator name if applicable, otherwise 'authoring tool'].",
+      "rationale": "Technical, not aesthetic — null context causes hallucination in the primary (machine) reader. The MUST-have-substantive-[SLOT: charter/equivalent for this spec] rule is a hallucination-prevention rule, not a quality preference."
+    },
+    {
+      "rule": "No content policing of consumers.",
+      "rationale": "What organizations choose to build using the [SLOT: spec-name] pattern is their business, not the spec's. [SLOT: spec-name] governs the pattern's integrity, not the morality of its applications. Curation happens at the LIBRARY level (canonical inclusion), not the SPEC level."
+    }
+  ],
+
+  "recommended_patterns": {
+    "general": [
+      {
+        "pattern": "Senior strategist role separation",
+        "description": "Specs SHOULD have a senior strategist role distinct from execution roles (maintainer, implementor), so each position stays in its lane.",
+        "rationale": "Same reason developers shouldn't do their own security testing — bounded scope per role enables clean handoffs and prevents authority concentration."
+      },
+      {
+        "pattern": "Two-section charter discipline",
+        "description": "Organize orgdef content into two implicit sections: 'how this org operates' (mission, vision, values, governance, positions, relationships, red_lines) vs 'what we recommend for orgs using this pattern' (recommended_patterns). The two sections serve different audiences.",
+        "rationale": "First section orients a reader joining this spec org; second section guides anyone deriving a new org from this one as a template. Conflating them muddles both audiences."
+      },
+      {
+        "pattern": "Recursive self-describing v1 milestone",
+        "description": "Treat 'this very orgdef exists as a valid, self-describing artifact in the org folder' as the spec's v1 success criterion.",
+        "rationale": "If the pattern can't bootstrap its own author, it can't bootstrap anyone. Self-description is the most demanding test case for a standards project."
+      }
+    ],
+    "recommended_roles": [
+      {
+        "role": "human-director",
+        "priority": "MUST",
+        "why": "Bounded-authority discipline requires a human ratifier."
+      },
+      {
+        "role": {
+          "id": "senior-open-standards-strategist",
+          "version": "1.0.0",
+          "url": "https://roledef.org/roledefs/senior-open-standards-strategist.openthing"
+        },
+        "priority": "MUST",
+        "why": "Library-curation, scope-narrowing, pattern-promotion calls."
+      },
+      {
+        "role": "[SLOT: spec-name]-maintainer",
+        "priority": "MUST",
+        "why": "Drafts spec text, walks SCHEMA validations, files decision artifacts."
+      },
+      {
+        "role": "canonical-implementor",
+        "priority": "SHOULD",
+        "why": "Reference renderers and validators are how the spec gets dogfooded."
+      }
+    ]
+  },
+
+  "v1_success_criterion": "[SLOT: spec-name] ships v1 when this very orgdef exists as a valid, self-describing orgdef:Organization artifact in the [SLOT: spec-name] org folder, conformant to a published [SLOT: spec-name] SCHEMA.md — proving the pattern can describe itself using itself.",
+
+  "positions": [
+    {
+      "id": "director",
+      "name": "Director",
+      "description": "[SLOT: human Director with final tiebreaker authority. No role_definition (humans are not derived from roledefs). Derivers replace this with their actual Director's name or leave generic.]"
+    },
+    {
+      "id": "strategist",
+      "name": "Strategist",
+      "description": "[SLOT: derive a job artifact from senior-open-standards-strategist specialized to your spec, then reference here via job_definition. The job artifact lives in your-org-folder/jobs/strategist.openthing per the filesystem convention.]"
+    },
+    {
+      "id": "maintainer",
+      "name": "Maintainer",
+      "description": "[SLOT: derive a job artifact for [spec-name]-maintainer (drafts spec text, walks SCHEMA validations, files decision artifacts). The job artifact lives in your-org-folder/jobs/maintainer.openthing.]"
+    },
+    {
+      "id": "canonical-implementor",
+      "name": "Canonical Implementor",
+      "description": "[SLOT: OPTIONAL. Derive a job artifact for canonical-implementor specialized to your spec (reference renderers, validators, test fixtures). The job artifact lives in your-org-folder/jobs/canonical-implementor.openthing. Omit if your spec doesn't need this role.]"
+    }
+  ],
+
+  "relationships": [
+    {
+      "type": "reports_to",
+      "from": "strategist",
+      "to": "director",
+      "description": "[SLOT: standard inherited; strategist holds delegated authority, Director ratifies decisions/merges/version-bumps/governance-changes]"
+    },
+    {
+      "type": "directs",
+      "from": "strategist",
+      "to": "maintainer",
+      "description": "[SLOT: standard inherited; strategist makes calls, maintainer drafts spec text in support of those calls]"
+    },
+    {
+      "type": "directs",
+      "from": "strategist",
+      "to": "canonical-implementor",
+      "description": "[SLOT: standard inherited if implementor position present; strategist sets direction for canonical tooling priorities]"
+    }
+  ],
+
+  "metadata": {
+    "kind": "canonical-template",
+    "authors": [
+      "orgdef-strategist <orgdef-strategist@orgdef.org>"
+    ],
+    "license": "MIT",
+    "created": "2026-04-26",
+    "extracted_from": "Generalized from orgdef-spec/orgdef-spec-org/orgdef.openthing v1.0.0, the dogfood orgdef that proved out the pattern. Generalization preserves values, red_lines, and recommended_patterns verbatim (those are the load-bearing AIGP-family invariants); replaces orgdef-specific content (mission, scope, positions specifics) with [SLOT:...] placeholders for derivers to fill.",
+    "homepage": "https://orgdef.org/canonical-orgs/aigp-family-open-standard",
+    "repository": "https://github.com/orgdef-spec/orgdef/blob/main/canonical-orgs/aigp-family-open-standard.openthing",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-04-26",
+        "change": "Initial canonical template, extracted from orgdef-spec/orgdef-spec-org/orgdef.openthing v1.0.0. First entry in the canonical-orgs/ library. Submitted alongside the canonical-orgs-library proposal that establishes the canonical-orgs/ directory + metadata.kind field + derivation conventions."
+      }
+    ],
+    "derivation_conventions": "Per the additive-only derivation discipline per orgdef SCHEMA.md (once canonical-orgs-library proposal lands): derivers MAY add to values, red_lines, recommended_patterns; SHOULD NOT remove canonical entries (those are family-level invariants). Mission, scope, positions, relationships are derivation-specific (REPLACE, don't extend). Vision and governance_model are inheritable-or-refinable (most derivations will refine slightly; major deviation should be discussed with the orgdef-strategist).",
+    "instantiation_notes": "When deriving from this template: (1) replace all [SLOT:...] placeholders with concrete content; (2) add metadata.derived_from pointing at this canonical artifact (id + version + url); (3) author your own positions and relationships (deriving job artifacts from senior-open-standards-strategist and forthcoming canonical roledefs for maintainer/implementor); (4) set metadata.kind to 'operational'; (5) optionally add new entries to values, red_lines, recommended_patterns (do not remove canonical entries); (6) optionally refine vision and governance_model within bounds."
+  }
+}
