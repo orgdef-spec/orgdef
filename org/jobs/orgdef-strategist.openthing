@@ -46,8 +46,8 @@
     },
     "org_definition": {
       "id": "orgdef-spec",
-      "version": "0.0.1-bootstrap",
-      "url": "https://github.com/orgdef-spec/orgdef/blob/main/orgdef-spec-org/orgdef.md"
+      "version": "1.0.0",
+      "url": "https://github.com/orgdef-spec/orgdef/blob/main/org/orgdef-spec.openthing"
     },
     "placement": {
       "reports_to": "director",
@@ -78,7 +78,7 @@
     "created": "2026-04-26",
     "extracted_from": "Bootstrapped via job-creation-facilitator (sketch v0.0.1) during the orgdef-spec org dogfood session 2026-04-26. Initially authored as markdown + x.orgdef.charter / x.orgdef.placement extensions pending the role-vs-job-distinction and job-placement-and-charter-slots proposals. Migrated to formal roledef:Job .openthing form 2026-04-26 once roledef v0.2.0 schema landed.",
     "homepage": "https://orgdef.org/orgs/orgdef-spec/jobs/orgdef-strategist",
-    "repository": "https://github.com/orgdef-spec/orgdef/blob/main/orgdef-spec-org/jobs/orgdef-strategist.openthing",
+    "repository": "https://github.com/orgdef-spec/orgdef/blob/main/org/jobs/orgdef-strategist.openthing",
     "history": [
       {
         "version": "0.0.1-bootstrap",

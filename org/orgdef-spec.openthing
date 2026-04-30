@@ -96,7 +96,7 @@
       "job_definition": {
         "id": "orgdef-strategist",
         "version": "1.0.0",
-        "url": "https://github.com/orgdef-spec/orgdef/blob/main/orgdef-spec-org/jobs/orgdef-strategist.openthing"
+        "url": "https://github.com/orgdef-spec/orgdef/blob/main/org/jobs/orgdef-strategist.openthing"
       }
     },
     {
@@ -153,7 +153,7 @@
     "created": "2026-04-26",
     "extracted_from": "Bootstrapped via org-creation-facilitator (sketch v0.0.1) during the orgdef-spec org dogfood session 2026-04-26. Initially authored as markdown using narrative section headings (Mission / Vision / Values / Governance / Stakeholders / Red lines / Recommended patterns) pending the charter-shape-additions proposal landing. Migrated to formal orgdef:Organization .openthing form 2026-04-26 once orgdef v0.2.0 schema additions (vision, values, red_lines, recommended_patterns, position.job_definition) were approved.",
     "homepage": "https://orgdef.org/orgs/orgdef-spec",
-    "repository": "https://github.com/orgdef-spec/orgdef/blob/main/orgdef-spec-org/orgdef.openthing",
+    "repository": "https://github.com/orgdef-spec/orgdef/blob/main/org/orgdef-spec.openthing",
     "history": [
       {
         "version": "0.0.1-bootstrap",
