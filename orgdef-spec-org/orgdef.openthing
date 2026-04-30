@@ -1,0 +1,171 @@
+{
+  "catdef": "1.4",
+  "orgdef": "0.2.0",
+  "type": "orgdef:Organization",
+  "id": "orgdef-spec",
+  "name": "orgdef-spec",
+  "version": "1.0.0",
+
+  "mission": "Define the structure and jobs of an organization in an open, machine-readable way. The output is a persistent charter that bootstraps any AI worker into an organizational job with zero context backfill.",
+
+  "vision": "AI Governance Pattern (AIGP) family — alongside catdef, roledef, and memodef — defining the pattern of an AI-first organization. The primary reader of an orgdef is an AI, including AIs in adjacent organizations: when a business owner engages a lawyer, accountant, or marketing firm, they may exchange orgdefs as the introduction artifact.",
+
+  "scope": "The orgdef schema, conformance test suite, canonical orgdefs library, and the org-creation/job-creation facilitator pattern. Out of scope: enforcing what consumers build with orgdef (content-neutral), providing runtime infrastructure (specification only), substrate-level concerns belonging to catdef.",
+
+  "governance_model": "Bounded AI authority + human Director ratification. The orgdef-strategist (AI role) holds delegated authority for design decisions; the orgdef-maintainer (AI role, separate seat) drafts spec text and conformance fixtures; the human Director (Scott) holds final tiebreaker authority on every merge, version bump, and governance change. Mirrors the catdef-family pattern.",
+
+  "values": [
+    {
+      "name": "openness",
+      "description": "orgdef is fundamentally open — a pattern, not a product. No vendor lock-in, no privileged implementer, no proprietary extensions in the core spec. All AI runtimes (Anthropic, OpenAI, xAI, Google, future) are equal citizens.",
+      "rationale": "Adoption depends on equal-citizen treatment of all implementers; vendor capture would defeat the standard's purpose. Forks are welcome — anyone can publish their own orgdef library at any URL using the same format."
+    },
+    {
+      "name": "completeness",
+      "description": "The orgdef + roledef + job bundle MUST be sufficient that a fresh AI runtime loaded with the bundle becomes the job, with zero context backfill. As CLAUDE.md is to an individual Claude instance, the bundle is to the organizational job that instance occupies.",
+      "rationale": "Hallucination-prevention rule, not aesthetic preference. The primary reader is a machine; null context invites confabulation. A job artifact missing structural placement or charter forces the AI to either guess or ask the user, which violates the zero-friction bar."
+    }
+  ],
+
+  "red_lines": [
+    {
+      "rule": "No NULL-context orgdefs accepted by the spec, the validator, or the canonical org-creation-facilitator.",
+      "rationale": "Technical, not aesthetic — null context causes hallucination in the primary (machine) reader. The MUST-have-substantive-charter rule is a hallucination-prevention rule, not a quality preference."
+    },
+    {
+      "rule": "No content policing of consumers.",
+      "rationale": "What organizations choose to build using the orgdef pattern is their business, not the spec's. orgdef governs the pattern's integrity, not the morality of its applications. Curation happens at the LIBRARY level (canonical inclusion), not the SPEC level."
+    }
+  ],
+
+  "recommended_patterns": {
+    "general": [
+      {
+        "pattern": "Senior strategist role separation",
+        "description": "Orgs SHOULD have a senior strategist role distinct from execution roles (maintainer, implementor), so each position stays in its lane.",
+        "rationale": "Same reason developers shouldn't do their own security testing — bounded scope per role enables clean handoffs and prevents authority concentration."
+      },
+      {
+        "pattern": "Two-section charter discipline",
+        "description": "Organize orgdef content into two implicit sections: 'how this org operates' (mission, vision, values, governance, positions, relationships, red_lines) vs 'what we recommend for orgs using this pattern' (recommended_patterns). The two sections serve different audiences.",
+        "rationale": "First section orients a reader joining this org; second section guides anyone deriving a new org from this one as a template. Conflating them muddles both audiences."
+      },
+      {
+        "pattern": "Recursive self-describing v1 milestone",
+        "description": "An orgdef-derived project SHOULD treat 'this very orgdef exists as a valid, self-describing artifact in the org folder' as its v1 success criterion.",
+        "rationale": "If the pattern can't bootstrap its own author, it can't bootstrap anyone. Self-description is the most demanding test case for a standards project."
+      }
+    ],
+    "recommended_roles": [
+      {
+        "role": "human-director",
+        "priority": "MUST",
+        "why": "Bounded-authority discipline requires a human ratifier."
+      },
+      {
+        "role": {
+          "id": "senior-open-standards-strategist",
+          "version": "1.0.0",
+          "url": "https://roledef.org/roledefs/senior-open-standards-strategist.openthing"
+        },
+        "priority": "MUST",
+        "why": "Library-curation, scope-narrowing, pattern-promotion calls."
+      },
+      {
+        "role": "orgdef-maintainer",
+        "priority": "MUST",
+        "why": "Drafts spec text, walks SCHEMA validations, files decision artifacts."
+      },
+      {
+        "role": "canonical-implementor",
+        "priority": "SHOULD",
+        "why": "Reference renderers and validators are how the spec gets dogfooded."
+      }
+    ]
+  },
+
+  "positions": [
+    {
+      "id": "director",
+      "name": "Director",
+      "description": "Human Director with final tiebreaker authority. No role_definition (humans are not derived from roledefs)."
+    },
+    {
+      "id": "strategist",
+      "name": "Strategist",
+      "job_definition": {
+        "id": "orgdef-strategist",
+        "version": "1.0.0",
+        "url": "https://github.com/orgdef-spec/orgdef/blob/main/orgdef-spec-org/jobs/orgdef-strategist.openthing"
+      }
+    },
+    {
+      "id": "maintainer",
+      "name": "Maintainer",
+      "description": "Drafts spec text, walks SCHEMA validations, files decision artifacts. Job artifact TBD; reference role is forthcoming orgdef-maintainer roledef."
+    },
+    {
+      "id": "canonical-implementor",
+      "name": "Canonical Implementor",
+      "description": "Develops and tests canonical implementations of orgdef-shaped tools (orgdef-renderer, validators, test fixtures). Job artifact TBD; reference role is forthcoming canonical-implementor roledef."
+    }
+  ],
+
+  "relationships": [
+    {
+      "type": "reports_to",
+      "from": "strategist",
+      "to": "director",
+      "description": "Strategist holds delegated authority; Director ratifies decisions, merges, version bumps, governance changes."
+    },
+    {
+      "type": "directs",
+      "from": "strategist",
+      "to": "maintainer",
+      "description": "Strategist makes calls; maintainer drafts spec text and validation walks in support of those calls."
+    },
+    {
+      "type": "directs",
+      "from": "strategist",
+      "to": "canonical-implementor",
+      "description": "Strategist sets direction for canonical tooling priorities; implementor produces and tests reference implementations."
+    },
+    {
+      "type": "coordinates_with",
+      "from": "strategist",
+      "to": "external:catdef-strategist",
+      "description": "Cross-spec coordination on catdef substrate concerns. v0.1 leaves cross-org references informal; the from/to here points at a position in the catdef-spec orgdef (not yet formalized as a resolvable URI)."
+    },
+    {
+      "type": "coordinates_with",
+      "from": "strategist",
+      "to": "external:roledef-strategist",
+      "description": "Cross-spec coordination on roledef concerns (job-shape, library-curation). v0.1 leaves cross-org references informal."
+    }
+  ],
+
+  "metadata": {
+    "authors": [
+      "Scott <scott@confusedgorilla.com> (Director)",
+      "orgdef-strategist <orgdef-strategist@orgdef.org>"
+    ],
+    "license": "MIT",
+    "created": "2026-04-26",
+    "extracted_from": "Bootstrapped via org-creation-facilitator (sketch v0.0.1) during the orgdef-spec org dogfood session 2026-04-26. Initially authored as markdown using narrative section headings (Mission / Vision / Values / Governance / Stakeholders / Red lines / Recommended patterns) pending the charter-shape-additions proposal landing. Migrated to formal orgdef:Organization .openthing form 2026-04-26 once orgdef v0.2.0 schema additions (vision, values, red_lines, recommended_patterns, position.job_definition) were approved.",
+    "homepage": "https://orgdef.org/orgs/orgdef-spec",
+    "repository": "https://github.com/orgdef-spec/orgdef/blob/main/orgdef-spec-org/orgdef.openthing",
+    "history": [
+      {
+        "version": "0.0.1-bootstrap",
+        "date": "2026-04-26",
+        "change": "Initial bootstrap as markdown form via org-creation-facilitator. Provisional pending orgdef schema additions for vision/values/red_lines/recommended_patterns."
+      },
+      {
+        "version": "1.0.0",
+        "date": "2026-04-26",
+        "change": "Migrated to formal orgdef:Organization type per orgdef v0.2.0 (charter-shape-additions accepted). Narrative markdown sections promoted to structured fields: Vision → vision, Values → values[] with rationale, Red lines → red_lines[] with rationale, Recommended patterns → recommended_patterns{general, recommended_roles}. Stakeholders/orbit narrative formalized as positions[] + relationships[]. Substantive content unchanged; structure now machine-traversable."
+      }
+    ],
+    "v1_success_criterion": "orgdef-spec ships v1 when this very orgdef exists as a valid, self-describing orgdef:Organization artifact in the orgdef-spec org folder, conformant to a published orgdef SCHEMA.md — proving the pattern can describe itself using itself. Status: this artifact represents the v1 milestone reaching authored form; full v1 ships once the orgdef SCHEMA.md update lands and the artifact passes the validator."
+  }
+}
