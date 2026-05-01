@@ -3,13 +3,13 @@
 **Disposition:** Accept with Modifications
 **Origin:** [proposals/canonical-orgs-library.md](../proposals/canonical-orgs-library.md)
 **Decided:** 2026-04-26 by orgdef-strategist
-**Companion submission:** [proposed-orgs/aigp-family-open-standard.openthing](../proposed-orgs/aigp-family-open-standard.openthing) — first canonical template, ready for promotion to `canonical-orgs/` upon acceptance
+**Companion submission:** [proposed-orgs/oagp-family-open-standard.openthing](../proposed-orgs/oagp-family-open-standard.openthing) — first canonical template, ready for promotion to `canonical-orgs/` upon acceptance
 **Cross-spec:** Sibling-spec coordination (roledef's `sample-jobs/` precedent acknowledged; this proposal adopts a parallel pattern with intentional naming difference). Memo to roledef-strategist forthcoming as informational notification (no roledef-side action required).
 **Bootstrap caveat:** Same-head provenance (orgdef-strategist + roledef-strategist held by one head during catdef-family bootstrap). Per discipline, the artifact trail still goes through orgdef's `proposals/` and `decisions/`; this decision is the orgdef-side decision-of-record.
 
 ## Disposition
 
-The canonical-orgs library proposal — adding the `canonical-orgs/` directory, the `metadata.kind` field on `orgdef:Organization`, and orgdef-specific derivation conventions — is **Accepted with two modifications**. The first canonical template (`aigp-family-open-standard`) is **strategist-cleared for promotion** via the standard two-stage workflow upon SCHEMA.md/CONTRIBUTING.md updates landing.
+The canonical-orgs library proposal — adding the `canonical-orgs/` directory, the `metadata.kind` field on `orgdef:Organization`, and orgdef-specific derivation conventions — is **Accepted with two modifications**. The first canonical template (`oagp-family-open-standard`) is **strategist-cleared for promotion** via the standard two-stage workflow upon SCHEMA.md/CONTRIBUTING.md updates landing.
 
 The two modifications tighten Open Question 4 (which MUSTs are template-relaxed) and resolve the slot-placeholder convention question with a more durable convention than the proposal's informal `[SLOT: ...]` strings.
 
@@ -139,20 +139,20 @@ When schema work begins:
 
 4. **Validator updates** — per the proposal's validator-behavior section + M1/M2 additions: `__slot__` object recognition for canonical-templates; rejection of `__slot__` objects in operational artifacts; STRICT/RELAXED MUSTs enforcement per kind.
 
-5. **Promote first canonical template** — `proposed-orgs/aigp-family-open-standard.openthing` to `canonical-orgs/aigp-family-open-standard.openthing` per the standard two-stage workflow, with a `decisions/aigp-family-open-standard.md` decision artifact recording the promotion rationale.
+5. **Promote first canonical template** — `proposed-orgs/oagp-family-open-standard.openthing` to `canonical-orgs/oagp-family-open-standard.openthing` per the standard two-stage workflow, with a `decisions/oagp-family-open-standard.md` decision artifact recording the promotion rationale.
 
-6. **Migrate the first template's slot convention** — patch `proposed-orgs/aigp-family-open-standard.openthing` (or the promoted version) to use `__slot__` objects instead of `[SLOT: ...]` strings per M1. May happen in the same PR as the promotion or a follow-on; maintainer's call.
+6. **Migrate the first template's slot convention** — patch `proposed-orgs/oagp-family-open-standard.openthing` (or the promoted version) to use `__slot__` objects instead of `[SLOT: ...]` strings per M1. May happen in the same PR as the promotion or a follow-on; maintainer's call.
 
 7. **Version bump** — orgdef SCHEMA from v0.2.0 to v0.3.0 (additive minor).
 
-## Companion submission: `aigp-family-open-standard`
+## Companion submission: `oagp-family-open-standard`
 
-The first canonical template ([proposed-orgs/aigp-family-open-standard.openthing](../proposed-orgs/aigp-family-open-standard.openthing)) is **strategist-cleared** for promotion via the standard two-stage workflow upon this proposal's acceptance.
+The first canonical template ([proposed-orgs/oagp-family-open-standard.openthing](../proposed-orgs/oagp-family-open-standard.openthing)) is **strategist-cleared** for promotion via the standard two-stage workflow upon this proposal's acceptance.
 
 **Strategist sign-off recorded:**
 
 - Schema-conformant against the post-modifications shape (catdef envelope, all STRICT MUSTs present, valid `orgdef:Organization` type, `metadata.kind: canonical-template`)
-- Generalization correctly preserves AIGP-family invariants (values, red_lines, recommended_patterns) verbatim from the orgdef-spec source
+- Generalization correctly preserves OAGP-family invariants (values, red_lines, recommended_patterns) verbatim from the orgdef-spec source
 - Slot placement is sensible (mission, scope, position descriptions are slot-shaped; vision and governance_model use partial-slot phrasing for inheritability)
 - Quality clean (rationales preserved on values/red_lines/recommended_patterns; instantiation_notes provide derivation guidance)
 
@@ -161,7 +161,7 @@ The first canonical template ([proposed-orgs/aigp-family-open-standard.openthing
 1. The artifact uses the v0.3.0 `metadata.kind` field but currently lives in `proposed-orgs/`. Validation against current v0.2 schema would flag the `kind` field as unrecognized. Acceptable — the artifact is forward-compatible by design (catdef substrate's lenient-reader rule applies). Resolves once schema lands.
 2. The artifact uses the `[SLOT: ...]` string convention rather than the M1-promoted `__slot__` object form. Acceptable as the interim convention; migration to `__slot__` form happens per build-directive item 6.
 
-**Recommendation to maintainer:** route through standard two-stage workflow. Promote to `canonical-orgs/aigp-family-open-standard.openthing` once SCHEMA.md/CONTRIBUTING.md updates land. No further strategist gate required.
+**Recommendation to maintainer:** route through standard two-stage workflow. Promote to `canonical-orgs/oagp-family-open-standard.openthing` once SCHEMA.md/CONTRIBUTING.md updates land. No further strategist gate required.
 
 ## Cross-spec coordination
 
@@ -176,15 +176,15 @@ action_required: false (informational).
 
 Per Acceptance Criteria #6:
 
-1. **Derive `catdef-spec/catdef-spec-org/orgdef.openthing`** from `aigp-family-open-standard` (separate proposal in catdef-spec or in the catdef-org context per the catdef-family pattern)
-2. **Derive `roledef-spec/roledef-spec-org/orgdef.openthing`** from `aigp-family-open-standard`
-3. **Derive memodef and other AIGP-family member specs** as they bootstrap further
+1. **Derive `catdef-spec/catdef-spec-org/orgdef.openthing`** from `oagp-family-open-standard` (separate proposal in catdef-spec or in the catdef-org context per the catdef-family pattern)
+2. **Derive `roledef-spec/roledef-spec-org/orgdef.openthing`** from `oagp-family-open-standard`
+3. **Derive memodef and other OAGP-family member specs** as they bootstrap further
 4. **Migration of the first canonical template's slot convention** from strings to `__slot__` objects per M1
 
 ## References
 
 - Originating proposal: [proposals/canonical-orgs-library.md](../proposals/canonical-orgs-library.md)
-- Companion submission: [proposed-orgs/aigp-family-open-standard.openthing](../proposed-orgs/aigp-family-open-standard.openthing)
+- Companion submission: [proposed-orgs/oagp-family-open-standard.openthing](../proposed-orgs/oagp-family-open-standard.openthing)
 - Source artifact (the source for generalization): [orgdef-spec-org/orgdef.openthing](../orgdef-spec-org/orgdef.openthing)
 - Sibling-spec precedent: [`roledef-spec/roledef/decisions/proposal-role-vs-job-distinction.md`](https://github.com/roledef-spec/roledef/blob/main/decisions/proposal-role-vs-job-distinction.md) (M3 added `sample-jobs/`)
 - Sibling-spec derivation conventions: [`roledef-spec/roledef/SCHEMA.md`](https://github.com/roledef-spec/roledef/blob/main/SCHEMA.md) — `metadata.derived_from` rules

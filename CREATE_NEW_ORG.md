@@ -18,7 +18,7 @@ Step 1 — Load the facilitator role:
   (or fetch from https://roledef.org/roledefs/org-creation-facilitator.openthing once promoted to canonical)
 
 Step 2 — Load a canonical template if one fits:
-- C:/projects/orgdef/proposed-orgs/aigp-family-open-standard.openthing — fits AIGP-family open standard projects (catdef, roledef, orgdef, memodef shape)
+- C:/projects/orgdef/proposed-orgs/oagp-family-open-standard.openthing — fits OAGP-family open standard projects (catdef, roledef, orgdef, memodef shape)
 - (Other canonical templates as the canonical-orgs/ library grows — SaaS product, non-profit, consulting firm, etc.)
 - If no template fits cleanly, derive bespoke (the facilitator handles this path natively)
 
@@ -54,9 +54,9 @@ Usually `<project>` itself, unless your project has a different canonical slug (
 
 The org-creation-facilitator's workflow handles bespoke derivation natively. Loading no canonical template means the facilitator will conduct a full interview rather than a slot-fill. The minimal prompt just needs the facilitator + your project context.
 
-### Adding precedent context for AIGP-family work
+### Adding precedent context for OAGP-family work
 
-If you're deriving an orgdef for an AIGP-family member spec (catdef, roledef, orgdef, memodef, or a future sibling), add Step 6.5: load the prior derivation memos at `C:/projects/orgdef/memos/` and the cross-spec coordination context (relevant decisions in catdef-spec/decisions, roledef-spec/decisions, etc.). For non-family projects, skip — the precedent context isn't load-bearing.
+If you're deriving an orgdef for an OAGP-family member spec (catdef, roledef, orgdef, memodef, or a future sibling), add Step 6.5: load the prior derivation memos at `C:/projects/orgdef/memos/` and the cross-spec coordination context (relevant decisions in catdef-spec/decisions, roledef-spec/decisions, etc.). For non-family projects, skip — the precedent context isn't load-bearing.
 
 ---
 
@@ -84,13 +84,13 @@ Total interaction time: typically 5–15 exchanges depending on how much context
 
 A canonical template captures family-wide invariants (values, red lines, recommended patterns) that would otherwise be re-authored from scratch. Currently the canonical-orgs/ library holds:
 
-- `aigp-family-open-standard` — for AIGP-family open standard projects (spec org with strategist + maintainer + implementor + Director seats)
+- `oagp-family-open-standard` — for OAGP-family open standard projects (spec org with strategist + maintainer + implementor + Director seats)
 
 When a derivation uses Path A, the additive-only convention applies: derivers may add to values/red_lines/recommended_patterns; should not remove canonical entries (those are family-level invariants).
 
 ### Path B: bespoke derivation (no canonical)
 
-For projects that don't fit any current canonical template (most non-AIGP projects today — SaaS products, consulting firms, non-profits, etc.), the facilitator conducts a full interview from scratch. The output is still a valid `orgdef:Organization` artifact; it just doesn't have a `metadata.derived_from` reference. If patterns surface across multiple bespoke derivations, those are candidates for promotion to new canonical templates in a future canonical-orgs/ entry.
+For projects that don't fit any current canonical template (most non-OAGP projects today — SaaS products, consulting firms, non-profits, etc.), the facilitator conducts a full interview from scratch. The output is still a valid `orgdef:Organization` artifact; it just doesn't have a `metadata.derived_from` reference. If patterns surface across multiple bespoke derivations, those are candidates for promotion to new canonical templates in a future canonical-orgs/ entry.
 
 > **Forward-looking note:** organizations that produce bespoke orgdefs MAY be invited to submit them as canonical templates for the canonical-orgs/ library, helping future organizations of similar shape (SaaS product, non-profit, consulting firm, etc.) bootstrap from a tested starting point rather than from scratch. The submission pipeline for this is forthcoming; for now, file an issue or memo to orgdef-strategist if your bespoke orgdef captures patterns you'd like to see become canonical.
 
@@ -118,7 +118,7 @@ The artifact lives in the org folder per the canonical-template v1.1 placement c
 
 ## References
 
-- Canonical template (current): [proposed-orgs/aigp-family-open-standard.openthing](proposed-orgs/aigp-family-open-standard.openthing)
+- Canonical template (current): [proposed-orgs/oagp-family-open-standard.openthing](proposed-orgs/oagp-family-open-standard.openthing)
 - Org-creation-facilitator roledef: [github.com/roledef-spec/roledef/blob/main/proposed-roledefs/org-creation-facilitator.openthing](https://github.com/roledef-spec/roledef/blob/main/proposed-roledefs/org-creation-facilitator.openthing)
 - Job-creation-facilitator roledef (for adding positions later): [github.com/roledef-spec/roledef/blob/main/proposed-roledefs/job-creation-facilitator.openthing](https://github.com/roledef-spec/roledef/blob/main/proposed-roledefs/job-creation-facilitator.openthing)
 - orgdef SCHEMA: [SCHEMA.md](SCHEMA.md)

@@ -4,11 +4,11 @@
 **Author:** orgdef-strategist (provisional bot identity pending governance ratification)
 **Created:** 2026-04-26
 **Target version:** 0.3.0
-**Origin:** Recursive completion of the orgdef-spec dogfood. Director (Scott) foreshadowed this work: "the last recursive piece is going to be to draft our first model orgdef, based on your/our orgdef organization. Which I will then use to create orgdefs for the roledef and catdef organizations." This proposal creates the substrate for that work and includes the first canonical template (`aigp-family-open-standard`) as the exemplar submission.
+**Origin:** Recursive completion of the orgdef-spec dogfood. Director (Scott) foreshadowed this work: "the last recursive piece is going to be to draft our first model orgdef, based on your/our orgdef organization. Which I will then use to create orgdefs for the roledef and catdef organizations." This proposal creates the substrate for that work and includes the first canonical template (`oagp-family-open-standard`) as the exemplar submission.
 
 ## Summary
 
-Adds a `canonical-orgs/` directory to the orgdef-spec repo for **canonical templates** — orgdef artifacts that exist to be *derived from*, not to describe a real org. Adds `metadata.kind` field on `orgdef:Organization` to discriminate `operational` (default) from `canonical-template`. Adds derivation conventions (parallel to roledef's `metadata.derived_from` rules) for orgdefs derived from canonical templates. Includes the first canonical template, `aigp-family-open-standard`, generalized from the just-migrated orgdef-spec orgdef.
+Adds a `canonical-orgs/` directory to the orgdef-spec repo for **canonical templates** — orgdef artifacts that exist to be *derived from*, not to describe a real org. Adds `metadata.kind` field on `orgdef:Organization` to discriminate `operational` (default) from `canonical-template`. Adds derivation conventions (parallel to roledef's `metadata.derived_from` rules) for orgdefs derived from canonical templates. Includes the first canonical template, `oagp-family-open-standard`, generalized from the just-migrated orgdef-spec orgdef.
 
 ## Motivation
 
@@ -28,7 +28,7 @@ The clean answer: **extract the common structure into a canonical template**, de
 
 There's a real difference between:
 - **Operational orgdefs** — describe a real org (e.g., orgdef-spec, an actual project with actual roles staffed)
-- **Canonical templates** — exist to be derived from (e.g., "AIGP-family open standard", a pattern other orgs instantiate)
+- **Canonical templates** — exist to be derived from (e.g., "OAGP-family open standard", a pattern other orgs instantiate)
 
 These have different lifecycles, different audiences, different curation criteria. Conflating them in a single `orgs/` directory loses the distinction (renderers can't differentiate; validators can't apply different rules; library curation can't track which entries are templates vs operational).
 
@@ -38,7 +38,7 @@ Brother-roledef's just-accepted [`role-vs-job-distinction`](https://github.com/r
 
 Roledef has [explicit derivation conventions](https://github.com/roledef-spec/roledef/blob/main/SCHEMA.md#derivation-rules) for safe `derived_from` chains: additive-only for guardrails, voice/identity refinable but not contradictable, output_contract additive-or-tightenable, etc. Without parallel conventions for orgdef derivation, derivers don't know what's safe to change and what's load-bearing for the canonical pattern.
 
-Empirically (from drafting the AIGP-family canonical template included with this proposal): the conventions are obvious in some cases (mission/scope are replaced; values are inherited verbatim) and subtle in others (vision is inheritable-but-refinable; governance_model can be customized within bounds). Articulating them prevents future bikeshed-by-implementer.
+Empirically (from drafting the OAGP-family canonical template included with this proposal): the conventions are obvious in some cases (mission/scope are replaced; values are inherited verbatim) and subtle in others (vision is inheritable-but-refinable; governance_model can be customized within bounds). Articulating them prevents future bikeshed-by-implementer.
 
 ## Proposed Change
 
@@ -53,7 +53,7 @@ orgdef-spec/orgdef/
 │   ├── catdef-spec.openthing
 │   └── ...
 ├── canonical-orgs/          ← canonical templates (derive from these)
-│   ├── aigp-family-open-standard.openthing
+│   ├── oagp-family-open-standard.openthing
 │   ├── canadian-non-profit.openthing (future)
 │   ├── early-stage-saas.openthing (future)
 │   └── ...
@@ -114,15 +114,15 @@ Mirror roledef's `metadata.derived_from` discipline. A derived orgdef:
   - SHOULD verify additive-only invariant against the parent (no removed values, red_lines, recommended_patterns entries)
   - MAY verify content of REFINE-discipline fields (vision, governance_model) hasn't structurally contradicted the parent — this is a soft check, since "contradicted" is judgmental
 
-### First canonical template: `aigp-family-open-standard`
+### First canonical template: `oagp-family-open-standard`
 
-Submitted alongside this proposal at `proposed-orgs/aigp-family-open-standard.openthing`. Generalized from `orgdef-spec/orgdef-spec-org/orgdef.openthing` (just migrated). Slot-shaped fields use `[SLOT: description]` placeholders for content derivers must fill.
+Submitted alongside this proposal at `proposed-orgs/oagp-family-open-standard.openthing`. Generalized from `orgdef-spec/orgdef-spec-org/orgdef.openthing` (just migrated). Slot-shaped fields use `[SLOT: description]` placeholders for content derivers must fill.
 
 The template's intended derivers (initial):
 - `catdef-spec/catdef-spec-org/orgdef.openthing` (the catdef-spec organization)
 - `roledef-spec/roledef-spec-org/orgdef.openthing` (the roledef-spec organization)
 - `memodef-spec/memodef-spec-org/orgdef.openthing` (when memodef bootstraps further)
-- Future AIGP-family member specs
+- Future OAGP-family member specs
 
 ## Backward Compatibility
 
@@ -164,7 +164,7 @@ Author the template in the proposal text itself (no separate artifact); make it 
 
 ### Alt 4: Multi-tier derivation (canonical-template can derive from canonical-template)
 
-Allow chains: a specialized canonical template (e.g., "Canadian non-profit AIGP-family open standard") could derive from the general AIGP-family canonical.
+Allow chains: a specialized canonical template (e.g., "Canadian non-profit OAGP-family open standard") could derive from the general OAGP-family canonical.
 
 **Considered but deferred to v0.4+:** v0.3 establishes single-tier derivation (operational derives from canonical-template). Multi-tier is appealing for richer template hierarchies but adds complexity (chain validation, additive-only across multiple tiers, version-skew issues across the chain). Defer until concrete use cases motivate it. v0.3's single tier covers the catdef-family's immediate needs.
 
@@ -200,17 +200,17 @@ If accepted:
 
 4. **Validator updates** — per the validator-behavior section above.
 
-5. **Promote first canonical template** — `proposed-orgs/aigp-family-open-standard.openthing` (submitted alongside this proposal) gets promoted to `canonical-orgs/aigp-family-open-standard.openthing` upon acceptance, becoming the first entry in the canonical library.
+5. **Promote first canonical template** — `proposed-orgs/oagp-family-open-standard.openthing` (submitted alongside this proposal) gets promoted to `canonical-orgs/oagp-family-open-standard.openthing` upon acceptance, becoming the first entry in the canonical library.
 
 6. **Foreshadowed downstream work** (separate proposals):
-   - Derive `catdef-spec/catdef-spec-org/orgdef.openthing` from the AIGP-family canonical
-   - Derive `roledef-spec/roledef-spec-org/orgdef.openthing` from the AIGP-family canonical
-   - Eventually: derive memodef and other AIGP-family member specs
+   - Derive `catdef-spec/catdef-spec-org/orgdef.openthing` from the OAGP-family canonical
+   - Derive `roledef-spec/roledef-spec-org/orgdef.openthing` from the OAGP-family canonical
+   - Eventually: derive memodef and other OAGP-family member specs
 
 ## References
 
 - Empirical exemplar (the source for generalization): [orgdef-spec-org/orgdef.openthing](../orgdef-spec-org/orgdef.openthing)
-- First canonical template (submitted alongside this proposal): [proposed-orgs/aigp-family-open-standard.openthing](../proposed-orgs/aigp-family-open-standard.openthing)
+- First canonical template (submitted alongside this proposal): [proposed-orgs/oagp-family-open-standard.openthing](../proposed-orgs/oagp-family-open-standard.openthing)
 - Sibling-spec precedent for the directory-split pattern: [`roledef-spec/roledef/decisions/proposal-role-vs-job-distinction.md`](https://github.com/roledef-spec/roledef/blob/main/decisions/proposal-role-vs-job-distinction.md) (M3 added `sample-jobs/`)
 - Sibling-spec precedent for derivation conventions: [`roledef-spec/roledef/SCHEMA.md`](https://github.com/roledef-spec/roledef/blob/main/SCHEMA.md) — `metadata.derived_from` rules
 - Originating Director foreshadowing: 2026-04-26 conversation, "the last recursive piece is going to be to draft our first model orgdef, based on your/our orgdef organization. Which I will then use to create orgdefs for the roledef and catdef organizations."

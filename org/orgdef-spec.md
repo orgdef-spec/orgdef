@@ -3,7 +3,7 @@ type: orgdef:Organization
 id: orgdef-spec
 name: orgdef-spec
 version: 0.0.1-bootstrap
-substrate: catdef-family / AIGP
+substrate: catdef-family / OAGP
 created: 2026-04-26
 authors:
   - Scott (Director)
@@ -25,7 +25,7 @@ Define the structure and jobs of an organization in an open, machine-readable wa
 
 ## Vision
 
-orgdef is part of the AI Governance Pattern (AIGP) family — alongside catdef, roledef, and memodef — defining the *pattern* of an AI-first organization. The primary reader of an orgdef is an AI, including AIs in adjacent organizations: when a business owner engages a lawyer, accountant, or marketing firm, they may exchange orgdefs as the introduction artifact.
+orgdef is part of the Open Agentic Governance Pattern (OAGP) family — alongside catdef, roledef, and memodef — defining the *pattern* of an AI-first organization. The primary reader of an orgdef is an AI, including AIs in adjacent organizations: when a business owner engages a lawyer, accountant, or marketing firm, they may exchange orgdefs as the introduction artifact.
 
 ## Values
 
@@ -44,7 +44,7 @@ orgdef is part of the AI Governance Pattern (AIGP) family — alongside catdef, 
 - **Spec implementor** (orgdef-maintainer) — drafts spec text, conformance tests, governance documents
 - **Canonical-tools developer** — produces and tests reference implementations: canonical `orgdef.opencatalog` test files, orgdef-renderer (org-chart visualizer), validators
 - **Peer specs (substrate):** catdef and roledef. orgdef-spec is a *consumer* of these, equal-citizen with other consumers; may submit PRs upstream like any other implementer.
-- **Downstream consumers:** any organization adopting the AIGP pattern — solo developers, teams, businesses, cross-org AI exchanges.
+- **Downstream consumers:** any organization adopting the OAGP pattern — solo developers, teams, businesses, cross-org AI exchanges.
 
 ## Red lines
 

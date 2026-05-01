@@ -32,7 +32,7 @@ Open Question 3 (retroactive migration of orgdef-spec org folder) — yes, for i
 
 Execute in this order:
 
-1. **Canonical-template patch** — apply P1–P9 to `orgdef-spec/orgdef/proposed-orgs/aigp-family-open-standard.openthing`; bump version to v1.1.0; update history with patch summary.
+1. **Canonical-template patch** — apply P1–P9 to `orgdef-spec/orgdef/proposed-orgs/oagp-family-open-standard.openthing`; bump version to v1.1.0; update history with patch summary.
 2. **Facilitator path-string updates** — patch `roledef-spec/roledef/proposed-roledefs/org-creation-facilitator.openthing` (`output_contract.schema`) and `job-creation-facilitator.openthing` (`output_contract.destination`) to reflect Option C placement (`<spec>/org/<id>.openthing` and `<spec>/org/jobs/<job-id>.openthing`).
 3. **Spec repo migrations** — for each of the four spec repos (orgdef-spec, memodef-spec, roledef-spec, catdef-spec):
    - Move/rename `<spec>/<spec>-org/orgdef.openthing` → `<spec>/org/<spec>.openthing`

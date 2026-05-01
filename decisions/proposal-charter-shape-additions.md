@@ -172,7 +172,7 @@ A courtesy memo to roledef-strategist is forthcoming announcing that the orgdef-
 
 ## Foreshadowing: canonical template extraction
 
-Per the proposal's Acceptance Criteria #7, the next major work item (separate proposal/PR) is to lift the migrated `orgdef-spec/orgdef-spec-org/orgdef.openthing` into a canonical-library entry — working title `canonical-orgs/aigp-family-open-standard.openthing` — that catdef-spec and roledef-spec can derive their own orgdefs from. This is the recursive completion of the dogfood: orgdef-spec doesn't just bootstrap itself, it produces the canonical template other AIGP-family specs use to bootstrap themselves.
+Per the proposal's Acceptance Criteria #7, the next major work item (separate proposal/PR) is to lift the migrated `orgdef-spec/orgdef-spec-org/orgdef.openthing` into a canonical-library entry — working title `canonical-orgs/oagp-family-open-standard.openthing` — that catdef-spec and roledef-spec can derive their own orgdefs from. This is the recursive completion of the dogfood: orgdef-spec doesn't just bootstrap itself, it produces the canonical template other OAGP-family specs use to bootstrap themselves.
 
 That extraction is deliberately scoped out of this decision; it requires its own proposal-and-decision cycle, and surfaces fresh design questions (what generalizes vs what's orgdef-spec-specific; how to encode "fill these slots when deriving" in the template form; etc.).
 

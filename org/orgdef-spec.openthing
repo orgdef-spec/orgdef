@@ -8,7 +8,7 @@
 
   "mission": "Define the structure and jobs of an organization in an open, machine-readable way. The output is a persistent charter that bootstraps any AI worker into an organizational job with zero context backfill.",
 
-  "vision": "AI Governance Pattern (AIGP) family — alongside catdef, roledef, and memodef — defining the pattern of an AI-first organization. The primary reader of an orgdef is an AI, including AIs in adjacent organizations: when a business owner engages a lawyer, accountant, or marketing firm, they may exchange orgdefs as the introduction artifact.",
+  "vision": "Open Agentic Governance Pattern (OAGP) family — alongside catdef, roledef, and memodef — defining the pattern of an AI-first organization. The primary reader of an orgdef is an AI, including AIs in adjacent organizations: when a business owner engages a lawyer, accountant, or marketing firm, they may exchange orgdefs as the introduction artifact.",
 
   "scope": "The orgdef schema, conformance test suite, canonical orgdefs library, and the org-creation/job-creation facilitator pattern. Out of scope: enforcing what consumers build with orgdef (content-neutral), providing runtime infrastructure (specification only), substrate-level concerns belonging to catdef.",
 

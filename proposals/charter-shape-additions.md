@@ -18,7 +18,7 @@ All additions are grounded in real content from the orgdef-spec dogfood. None br
 
 On 2026-04-26 we bootstrapped the orgdef-spec org through interactive facilitation. The conversation produced an org charter (`orgdef-spec/orgdef-spec-org/orgdef.md`, provisional markdown form) whose substantive content **didn't fit cleanly into the v0.1 fields**. Five distinct content-shapes emerged that wanted homes:
 
-1. **Vision** distinct from mission. orgdef-spec's *mission* is "define org structure/jobs in an open machine-readable way" — concrete and actionable. Its *vision* is "AI Governance Pattern — the pattern of an AI-first organization, including inter-org-AI exchange" — aspirational framing. Both are load-bearing; collapsing them loses the distinction between *what we ship* and *what we're working toward*.
+1. **Vision** distinct from mission. orgdef-spec's *mission* is "define org structure/jobs in an open machine-readable way" — concrete and actionable. Its *vision* is "Open Agentic Governance Pattern — the pattern of an AI-first organization, including inter-org-AI exchange" — aspirational framing. Both are load-bearing; collapsing them loses the distinction between *what we ship* and *what we're working toward*.
 
 2. **Values** as named-with-technical-grounding. orgdef-spec articulates two values: openness and completeness. Critically, **completeness is not an aesthetic preference** — it's a hallucination-prevention rule grounded in the technical reality that the primary reader of an orgdef is a machine, and machines confabulate when given null context. Without a structured place to record values *with their rationale*, the technical grounding becomes folk wisdom rather than a defensible MUST.
 
@@ -30,7 +30,7 @@ On 2026-04-26 we bootstrapped the orgdef-spec org through interactive facilitati
 
 ### Why this matters for the canonical-orgdefs library
 
-The orgdef-spec org is the first artifact in what will become a canonical-orgdefs library. The Director's foreshadowing is explicit: orgdef-spec's charter will be lifted into a canonical template for "AIGP-family open standard project," then used to bootstrap orgdefs for the catdef-spec and roledef-spec organizations. The current v0.1 schema doesn't have the slots needed to express the patterns that will compound across the library — vision, values-with-rationale, red lines, and recommended-roles tables are *exactly* what canonical templates will live and die by.
+The orgdef-spec org is the first artifact in what will become a canonical-orgdefs library. The Director's foreshadowing is explicit: orgdef-spec's charter will be lifted into a canonical template for "OAGP-family open standard project," then used to bootstrap orgdefs for the catdef-spec and roledef-spec organizations. The current v0.1 schema doesn't have the slots needed to express the patterns that will compound across the library — vision, values-with-rationale, red lines, and recommended-roles tables are *exactly* what canonical templates will live and die by.
 
 ### Cross-spec coordination obligation
 
@@ -46,7 +46,7 @@ Two carryover items from the just-accepted roledef-side decisions land here:
 Single-statement aspirational framing. Distinct from `mission` (concrete deliverable) and `scope` (what's covered/excluded).
 
 ```json
-"vision": "AI Governance Pattern — the pattern of an AI-first organization, including inter-org-AI exchange where business owners can share orgdefs as the introduction artifact when engaging lawyers, accountants, marketing firms, etc."
+"vision": "Open Agentic Governance Pattern — the pattern of an AI-first organization, including inter-org-AI exchange where business owners can share orgdefs as the introduction artifact when engaging lawyers, accountants, marketing firms, etc."
 ```
 
 Format guidance: 1–2 sentences. Polymorphic translatable per catdef i18n. Articulates *what we're working toward*, not *what we currently ship*.
@@ -317,7 +317,7 @@ If accepted:
 
 6. **Cross-spec coordination already complete** — the SSoT rule and `position.job_definition` field were coordinated with roledef-strategist via the just-accepted `proposal-role-vs-job-distinction` and `proposal-job-placement-and-charter-slots` decisions. This proposal articulates the orgdef-side of the same coordination.
 
-7. **Foreshadowing: canonical template extraction** — once accepted and migrated, the orgdef-spec org's orgdef artifact will be lifted into a canonical-library entry (working title: `canonical-orgs/aigp-family-open-standard.openthing`), serving as the bootstrap template for catdef-spec, roledef-spec, and future AIGP-family member specs. That extraction is its own follow-on proposal in the canonical-orgdefs library work item; this proposal merely creates the substrate for it.
+7. **Foreshadowing: canonical template extraction** — once accepted and migrated, the orgdef-spec org's orgdef artifact will be lifted into a canonical-library entry (working title: `canonical-orgs/oagp-family-open-standard.openthing`), serving as the bootstrap template for catdef-spec, roledef-spec, and future OAGP-family member specs. That extraction is its own follow-on proposal in the canonical-orgdefs library work item; this proposal merely creates the substrate for it.
 
 ## References
 
