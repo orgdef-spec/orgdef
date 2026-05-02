@@ -123,4 +123,4 @@ The artifact lives in the org folder per the canonical-template v1.1 placement c
 - Job-creation-facilitator roledef (for adding positions later): [github.com/roledef-spec/roledef/blob/main/proposed-roledefs/job-creation-facilitator.openthing](https://github.com/roledef-spec/roledef/blob/main/proposed-roledefs/job-creation-facilitator.openthing)
 - orgdef SCHEMA: [SCHEMA.md](SCHEMA.md)
 - Prior derivation experience memos (worked examples): [memos/](memos/)
-- Worked operational orgdefs: `org/orgdef-spec.openthing` (this org), and the three sibling-spec orgs at `roledef-spec/roledef/org/roledef-spec.openthing`, `memodef-spec/memodef/org/memodef-spec.openthing`, `catdef-spec/catdef-spec/org/catdef-spec.openthing`.
+- Worked operational orgdefs (per the v1.2.0 `<id>-organization.openthing` filename convention): `org/orgdef-spec-organization.openthing` (this org), and the three sibling-spec orgs at `roledef-spec/roledef/org/roledef-spec-organization.openthing`, `memodef-spec/memodef/org/memodef-spec-organization.openthing`, `catdef-spec/org/catdef-spec-organization.openthing`.

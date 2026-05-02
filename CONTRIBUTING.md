@@ -131,6 +131,30 @@ Conformance fixtures live in `conformance/`:
 
 Contributors authoring new fixtures SHOULD add a brief README in the fixture's directory explaining what aspect of the schema the fixture exercises.
 
+## Inter-position communication conventions
+
+Per the canonical recommended_patterns.general entry "memos/ as the universal inter-position communication channel" (canonical-template v1.2.0), operational orgdefs SHOULD use `memos/` at the working-repo root for inter-position memos. Adopters whose layout makes this impractical (monorepos, vendor-imposed directory conventions, unusual deployment shapes) MAY declare an alternative path via the `x.org.memo_location` extension on the orgdef:Organization artifact:
+
+```json
+{
+  "x.org.memo_location": "communications/inter-position/"
+}
+```
+
+Validators SHOULD treat the path as relative to the artifact's working repo. The default convention when `x.org.memo_location` is absent is `memos/`. Sub-directory conventions within the location (e.g., maildir-style `inbox/`, `read/`, `archive/`) are governed by memodef-spec, not orgdef.
+
+Adopters who previously created an alternative directory category for intra-org operational handoffs (e.g., `handoffs/`) SHOULD migrate those artifacts to `memos/` as memodef:Memo artifacts with `action_required: true`. The body content of the prior plain-text artifact carries forward as the memo's body string (or via `body_ref` to a sibling `.body.md` file per memodef v0.2+ ergonomics); metadata (from / to / subject / sent / action_required) wraps the existing content. Deletion of the prior directory completes the migration; intermediate states where both directories exist for the same artifact category SHOULD be avoided.
+
+## Operational org-artifact filename conventions
+
+Per the canonical-template v1.2.0 instantiation_notes (11), operational org-artifact files SHOULD be named `<id>-organization.openthing` and placed at `<project>/org/`. The `-organization` suffix encodes artifact type at the filename level so the file is self-readable in isolation; the `<id>` portion remains the org's machine identifier and matches the artifact's `id` field. Adopters whose layout makes `<project>/org/` impractical MAY declare an alternative path via the `x.org.org_location` per-org extension on the orgdef artifact, following the same escape-hatch pattern as `x.org.memo_location`. Default convention when the extension is absent is `<project>/org/<id>-organization.openthing`.
+
+Job artifacts (`roledef:Job` per the role-vs-job distinction) live at `<project>/org/jobs/<job-id>.openthing` — no `-organization` suffix; job artifacts are self-typed via the `roledef:Job` type tag.
+
+Adopters whose operational orgdef artifact uses the prior convention `<project>/org/<id>.openthing` (no suffix; the v1.1.0 placement convention) SHOULD migrate to `<project>/org/<id>-organization.openthing` when convenient. The artifact's `id` field is unchanged; only the filename gains the suffix. Cross-spec references that resolve org artifacts by id (e.g., `metadata.org_definition.id` in `roledef:Job` artifacts) remain valid; cross-spec references that resolve by URL (e.g., `metadata.org_definition.url`) MUST update to the new filename path.
+
+The parallel canonical-orgs library convention (`<project>/orgs/`) currently uses a `-org` suffix on its first artifact; alignment with the operational `-organization` suffix is deferred to the v0.3 SCHEMA bundle.
+
 ## Strategist bot identity
 
 The orgdef-strategist role (forthcoming as a derivation of [`senior-open-standards-strategist`](https://roledef.org/roledefs/senior-open-standards-strategist.openthing)) operates under the bot identity `orgdef-strategist <orgdef-strategist@orgdef.org>` for commits and decision-artifact authorship. This is provisional pending governance ratification (Known Work Item, inherited from the catdef-family pattern).
