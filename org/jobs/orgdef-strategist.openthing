@@ -47,7 +47,7 @@
     "org_definition": {
       "id": "orgdef-spec",
       "version": "1.0.0",
-      "url": "https://github.com/orgdef-spec/orgdef/blob/main/org/orgdef-spec.openthing"
+      "url": "https://github.com/orgdef-spec/orgdef/blob/main/org/orgdef-spec-organization.openthing"
     },
     "placement": {
       "reports_to": "director",

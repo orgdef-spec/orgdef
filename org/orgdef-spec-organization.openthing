@@ -4,7 +4,7 @@
   "type": "orgdef:Organization",
   "id": "orgdef-spec",
   "name": "orgdef-spec",
-  "version": "1.0.0",
+  "version": "1.1.0",
 
   "mission": "Define the structure and jobs of an organization in an open, machine-readable way. The output is a persistent charter that bootstraps any AI worker into an organizational job with zero context backfill.",
 
@@ -153,7 +153,7 @@
     "created": "2026-04-26",
     "extracted_from": "Bootstrapped via org-creation-facilitator (sketch v0.0.1) during the orgdef-spec org dogfood session 2026-04-26. Initially authored as markdown using narrative section headings (Mission / Vision / Values / Governance / Stakeholders / Red lines / Recommended patterns) pending the charter-shape-additions proposal landing. Migrated to formal orgdef:Organization .openthing form 2026-04-26 once orgdef v0.2.0 schema additions (vision, values, red_lines, recommended_patterns, position.job_definition) were approved.",
     "homepage": "https://orgdef.org/orgs/orgdef-spec",
-    "repository": "https://github.com/orgdef-spec/orgdef/blob/main/org/orgdef-spec.openthing",
+    "repository": "https://github.com/orgdef-spec/orgdef/blob/main/org/orgdef-spec-organization.openthing",
     "history": [
       {
         "version": "0.0.1-bootstrap",
@@ -164,6 +164,11 @@
         "version": "1.0.0",
         "date": "2026-04-26",
         "change": "Migrated to formal orgdef:Organization type per orgdef v0.2.0 (charter-shape-additions accepted). Narrative markdown sections promoted to structured fields: Vision → vision, Values → values[] with rationale, Red lines → red_lines[] with rationale, Recommended patterns → recommended_patterns{general, recommended_roles}. Stakeholders/orbit narrative formalized as positions[] + relationships[]. Substantive content unchanged; structure now machine-traversable."
+      },
+      {
+        "version": "1.1.0",
+        "date": "2026-05-01",
+        "change": "Filename rename per decisions/proposal-operational-org-artifact-naming-convention.md: org/orgdef-spec.openthing → org/orgdef-spec-organization.openthing. The `-organization` suffix encodes artifact type at the filename level so the file is self-readable in isolation. id field unchanged ('orgdef-spec'); only filename + metadata.repository URL updated. Substantive content unchanged."
       }
     ],
     "v1_success_criterion": "orgdef-spec ships v1 when this very orgdef exists as a valid, self-describing orgdef:Organization artifact in the orgdef-spec org folder, conformant to a published orgdef SCHEMA.md — proving the pattern can describe itself using itself. Status: this artifact represents the v1 milestone reaching authored form; full v1 ships once the orgdef SCHEMA.md update lands and the artifact passes the validator."
