@@ -155,6 +155,79 @@ Adopters whose operational orgdef artifact uses the prior convention `<project>/
 
 The parallel canonical-orgs library convention (`<project>/orgs/`) currently uses a `-org` suffix on its first artifact; alignment with the operational `-organization` suffix is deferred to the v0.3 SCHEMA bundle.
 
+## Canonical OAGP position addressing
+
+Per the canonical-template v1.3.0 recommended_patterns.general entry "Canonical OAGP position addressing (URL-as-instruction)," OAGP-family positions are canonically addressed via URLs with three levels:
+
+| Level | URL shape | Returns |
+|---|---|---|
+| Account | `<scheme>://<host>/<account>` | Ordered list of orgs the account hosts |
+| Org | `<scheme>://<host>/<account>/<org>` | Ordered list of positions in this org |
+| Position | `<scheme>://<host>/<account>/<org>/<position>` | Fresh-agent boot payload for this position |
+
+Two-segment URLs (`<scheme>://<host>/<account>/<position>`) accepted as syntactic sugar when an account hosts exactly one org; resolves to the implicit org's position. (Mirrors GitHub's `github.com/<user>/<repo>` convention when `<user>` is a single-repo user.)
+
+### Cross-protocol equivalence
+
+The URL shape is protocol-agnostic. Examples:
+
+- **https (git-hosted):** `https://github.com/scott/thingalog/blob/master/org/jobs/product-strategist.openthing` — for git-hosted orgs the canonical URL IS the GitHub blob URL.
+- **mcp (openbraid-hosted):** `mcp.openbraid.app/scott/thingalog/product-strategist`
+- **mcp (self-hosted openbraid):** `mcp.firstchurch.org/treasurer` (two-segment sugar; account hosts one org)
+
+### Position list ordering at `<account>/<org>` — depth-first path walk
+
+Position lists are ordered by depth-first path walk through the org-chart hierarchy, following work-stream from authority to execution to validation, then moving to sibling branches. Example for a hypothetical sales-org:
+
+1. Strategist (authority root)
+2. Implementer (execution under strategist)
+3. QA (validation of implementer)
+4. Marketing (sibling branch — strategist-led)
+5. Sales Strategy (sibling branch — strategist-led)
+6. Sales Ops (execution under sales strategy)
+
+Rationale: a fresh AI reading the position list orients on strategy first, then execution, then verification, before context-switching to a parallel branch. Robust against shallow-vs-deep org variation.
+
+### `x.org.org_location` extension shape
+
+The extension carries the canonical hosting location with protocol discrimination. Single-location form (default):
+
+```json
+{
+  "x.org.org_location": {
+    "protocol": "git",
+    "url": "https://github.com/scott/thingalog"
+  }
+}
+```
+
+Mirror-list form (orgs maintaining git + openbraid simultaneously):
+
+```json
+{
+  "x.org.org_location": [
+    { "protocol": "git", "url": "https://github.com/scott/thingalog", "authoritative": true },
+    { "protocol": "mcp", "url": "mcp.openbraid.app/scott/thingalog", "authoritative": false }
+  ]
+}
+```
+
+When `authoritative: true` is declared on a list entry, that location is the source-of-truth; others are mirrors and SHOULD sync from authoritative. Mirror-list is steady-state (not migration-only) for orgs that want both auditability (git) AND mass-market accessibility (openbraid).
+
+Backward compatibility: tools that read the prior path-only string form of `x.org.org_location` (shipped 2026-05-01 in the inter-position-communication-convention decision) SHOULD treat it as `{ "protocol": "filesystem", "url": "<path>" }` for backward inference; new orgs SHOULD write the structured form.
+
+### Self-host parity
+
+`mcp.openbraid.app` is the default openbraid host but not the only one. Self-hosted openbraid instances live at any host (`mcp.firstchurch.org`, `org.acmecorp.com`, etc.) and speak the same protocol. URL scheme + host segments are interchangeable; the path-shape (`/<account>/<org>/<position>`) and semantics are invariant. This matches the family's anti-lock-in discipline applied at the hosting layer (parallel to the canonical-orgs-library "vendors do not own the spec" framing applied at the spec layer).
+
+### URL-as-instruction prompt collapse
+
+A consequence of canonical position addressing: the fresh-agent instantiation prompt collapses to one invariant shape regardless of context — `"You are <name>. Read <url> for your full assignment."` The URL determines the protocol; the protocol determines the access mechanism (https GET, MCP call, etc.); the response payload determines the agent's behavior. Variant-explosion (separate prompt shapes per runtime / per protocol) is not necessary.
+
+### Full-fidelity export as anti-lock-in escape valve
+
+An org hosted on openbraid (or any hosted service) can export its full orgdef artifact at any time as a portable `.openthing` file. The exported artifact can be republished elsewhere (git repo, self-hosted openbraid, archived as a static file, transferred to a different hosting service). This is the load-bearing property that prevents hosting from becoming lock-in: the artifact is portable; the hosting is choice.
+
 ## Strategist bot identity
 
 The orgdef-strategist role (forthcoming as a derivation of [`senior-open-standards-strategist`](https://roledef.org/roledefs/senior-open-standards-strategist.openthing)) operates under the bot identity `orgdef-strategist <orgdef-strategist@orgdef.org>` for commits and decision-artifact authorship. This is provisional pending governance ratification (Known Work Item, inherited from the catdef-family pattern).
