@@ -1,15 +1,19 @@
-# orgdef Schema — v0.1.0
+# orgdef Schema — v1.0.0
 
-This document defines the structure and validation rules for **orgdef artifacts**: portable, machine-readable specifications of organizational structure, expressed as catdef-compliant `.openthing` files.
+This document defines the structure and validation rules for **orgdef artifacts**: portable, machine-readable specifications of organizational structure, expressed as catdef-compliant `.opencatalog` files.
 
-An orgdef artifact describes an organization completely enough that:
+An orgdef artifact describes an organization atomically — charter + position roster + role specializations bundled in one transportable file — so that:
 
-- A reader (human or AI) can reconstruct the organization's structure: who has what authority, who reports to whom, what relationships exist between roles
-- The relationships between positions can be machine-traversed (graph queries, visualization, validation)
-- Position role-definitions are interoperable with the [roledef](https://github.com/roledef-spec/roledef) library (positions reference roledefs by id+url)
-- The org chart can be rendered, validated, and forked independently
+- A reader (human or AI) can reconstruct the organization's structure: positions, relationships, governance, recommended patterns, values, red lines
+- A fresh AI runtime can boot into a position with full context (org + role + job specialization + inbox state) from one file
+- The org chart can be rendered, validated, exported, and migrated between hosting protocols (git ↔ openbraid ↔ future) without information loss
+- Position role-definitions are interoperable with the [roledef](https://github.com/roledef-spec/roledef) library (positions reference roledefs by id+url) and job specializations live as items inside the same opencatalog
 
-This schema is the **load-bearing artifact** for orgdef. Everything else (this README, CONTRIBUTING, CLAUDE) is built around it.
+This schema is the **load-bearing artifact** for orgdef. The README, CONTRIBUTING, CLAUDE, and canonical template are built around it.
+
+## Version 1.0.0 — substrate-shape landing
+
+orgdef v0.x was experimental; the substrate-shape (`.openthing` per org + separate `.openthing` per job) didn't atomically transport. v1.0.0 corrects this by adopting the catdef substrate's `.opencatalog` primitive: one file carries the entire org. Pre-1.0 artifacts must be migrated; v1.0.0+ readers MUST NOT silently accept v0.x artifacts (substrate shape differs). Migration tooling is the adopter's responsibility.
 
 ---
 
@@ -21,31 +25,31 @@ This document uses RFC 2119 keywords:
 - **SHOULD** / **SHOULD NOT** — recommended; well-designed orgdefs follow these but they are not required for validity
 - **MAY** — permitted; an author's choice with no recommendation either way
 
-The schema also uses catdef's `x.` extension namespace pattern. Fields prefixed with `x.<domain>.<identifier>` are extensions — defined by adopters, not by the orgdef spec, and ignored by runtimes that don't recognize them.
+The schema uses catdef's `x.` extension namespace pattern. Fields prefixed with `x.<domain>.<identifier>` are extensions — defined by adopters, not by the orgdef spec, and ignored by runtimes that don't recognize them.
 
 ---
 
-## Substrate: catdef
+## Substrate: catdef opencatalog
 
-An orgdef artifact is a catdef `.openthing` document. catdef provides the structural format; orgdef defines the semantic shape inside that format. Every orgdef artifact MUST:
+An orgdef artifact is a catdef `.opencatalog` document of type `orgdef:Organization`. catdef provides the structural format (catalog with items); orgdef defines the semantic shape (which items appear, what catalog-level fields the charter carries). Every orgdef artifact MUST:
 
-- Be a valid catdef document (parseable as JSON conforming to catdef structural rules)
+- Be a valid catdef opencatalog document (parseable as JSON conforming to catdef structural rules)
 - Declare the catdef version it stamps under (`catdef` field)
-- Declare the orgdef schema version it conforms to (`orgdef` field)
-- Have its `type` set to one of the orgdef-namespaced types (`orgdef:Organization` for a single org; `orgdef:Library` for a catalog of orgs)
+- Declare the orgdef schema version it conforms to (`orgdef` field; MUST be `"1.0.0"` or higher for v1.0.0+ shape)
+- Have its `type` set to `"orgdef:Organization"` (or `"orgdef:Library"` for a catalog OF orgdefs — see Library section)
 
-Beyond these constraints, orgdef inherits catdef's full semantic toolkit (field types, polymorphic translatable fields, subcat enrichment, extension namespace, forward-compatibility rules, policy compliance).
+Beyond these constraints, orgdef inherits catdef's full semantic toolkit (field types, polymorphic translatable fields, extension namespace, forward-compatibility rules, policy compliance).
 
 ---
 
 ## File extensions
 
-orgdef artifacts use the catdef substrate's universal formats:
+orgdef artifacts use catdef substrate's catalog format:
 
-```
-catdef-org.openthing                ← single organization
-catdef-family.opencatalog           ← catalog of organizations
-```
+- `<id>-organization.opencatalog` — single organization (one orgdef:Organization per file)
+- `<id>.opencatalog` — library/catalog of orgdefs (one orgdef:Library per file)
+
+The `-organization` filename suffix (operational orgs) is per the 2026-05-01 operational-org-artifact-naming-convention decision. Canonical-library entries in `orgs/` use `<id>.opencatalog` without the suffix because their library context disambiguates.
 
 ---
 
@@ -54,18 +58,28 @@ catdef-family.opencatalog           ← catalog of organizations
 ```json
 {
   "catdef": "1.4",
-  "orgdef": "0.1.0",
+  "orgdef": "1.0.0",
   "type": "orgdef:Organization",
   "id": "<short-identifier>",
   "name": "<human-readable name>",
   "version": "<semver>",
 
   "mission": "...",
+  "vision": "...",
   "scope": "...",
   "governance_model": "...",
 
-  "positions": [...],
+  "values": [...],
+  "red_lines": [...],
+  "recommended_patterns": {...},
   "relationships": [...],
+
+  "items": [
+    { "type": "orgdef:Position", ... },
+    { "type": "orgdef:Position", ... },
+    { "type": "roledef:Job", ... },
+    ...
+  ],
 
   "metadata": {...},
 
@@ -73,11 +87,15 @@ catdef-family.opencatalog           ← catalog of organizations
 }
 ```
 
+**Catalog-level fields** (mission, vision, scope, governance_model, values, red_lines, recommended_patterns, relationships, metadata) describe the org as a whole.
+
+**Items** are the typed things that compose the org: positions (the roster) and jobs (the specializations).
+
 ---
 
-## Required fields (MUST) — `orgdef:Organization`
+## Required catalog-level fields (MUST)
 
-Every `orgdef:Organization` artifact MUST have all of the following fields, with non-empty values.
+Every `orgdef:Organization` artifact MUST have these catalog-level fields with non-empty values.
 
 ### `catdef` (string, semver)
 
@@ -89,409 +107,246 @@ The catdef version the artifact stamps under. Per catdef's writer-strict stampin
 
 ### `orgdef` (string, semver)
 
-The orgdef schema version this artifact conforms to. Used by validators to apply the correct schema rules.
+The orgdef schema version this artifact conforms to. For v1.0.0+ shape, MUST be `"1.0.0"` or higher.
 
 ```json
-"orgdef": "0.1.0"
+"orgdef": "1.0.0"
 ```
 
 ### `type` (string, fixed value)
 
-MUST be exactly the string `"orgdef:Organization"` for a single-org artifact, or `"orgdef:Library"` for a catalog of orgs.
-
-```json
-"type": "orgdef:Organization"
-```
+MUST be exactly `"orgdef:Organization"` for a single-org artifact, or `"orgdef:Library"` for a library of orgs.
 
 ### `id` (string)
 
-Short, kebab-case identifier for the organization. Used in filenames, URLs, and cross-references. MUST be unique within its publishing namespace (e.g., within `github.com/orgdef-spec/orgs/`).
-
-```json
-"id": "catdef-org"
-```
+Short, kebab-case identifier for the organization. Used in filenames, URLs, and cross-references. MUST be unique within its publishing namespace.
 
 ### `name` (string or polymorphic)
 
-Human-readable name of the organization. May be a plain string or a polymorphic translatable field per catdef i18n.
-
-```json
-"name": "catdef + roledef ecosystem"
-```
+Human-readable name. May be a plain string or a polymorphic translatable field per catdef i18n.
 
 ### `version` (string, semver)
 
-The artifact's own version (separate from the schema version).
-
-```json
-"version": "1.0.0"
-```
-
-### `positions` (array of `orgdef:Position` objects)
-
-The roles/seats in the organization. Every orgdef MUST declare at least one position. See **Position structure** below.
-
-```json
-"positions": [
-  { "id": "strategist", "name": "Strategist", ... },
-  { "id": "maintainer", "name": "Maintainer", ... },
-  ...
-]
-```
-
-### `relationships` (array of `orgdef:Relationship` objects)
-
-Typed edges between positions. Every orgdef MUST declare at least one relationship (otherwise the org is just a list of disconnected roles, which is rarely useful and signals incomplete authoring). See **Relationship structure** below.
-
-```json
-"relationships": [
-  { "type": "reports_to", "from": "strategist", "to": "human-steward" },
-  { "type": "validates_for", "from": "validator", "to": "contributor" },
-  ...
-]
-```
-
----
-
-## Recommended fields (SHOULD) — `orgdef:Organization`
+The artifact's own version (separate from the schema version). Bumps on substantive content change per [versioning rules](#versioning).
 
 ### `mission` (string)
 
-One- or two-sentence statement of what the organization exists to do. Used for org-level orientation.
-
-```json
-"mission": "Steward the catdef substrate spec and the catdef-family consumer specs as open standards."
-```
-
-### `scope` (string)
-
-What the organization covers and explicitly excludes. Distinguishes this org from adjacent orgs.
-
-```json
-"scope": "catdef substrate + roledef + future catdef-family consumer specs (orgdef, openmemo, openorg, aigp). Out of scope: AWS Thinkbox OpenJD, Oracle Open Agent Specification, chrisbarry/openagent — adjacent specs in different technical domains."
-```
+What the organization does. Single-paragraph statement, machine-readable.
 
 ### `governance_model` (string)
 
-How decisions get made in this org. Brief; details belong in CONTRIBUTING.md / CLAUDE.md per spec.
+How decisions get made: who has what authority, who ratifies, who escalates. Substantive content (the catdef-family pattern: bounded AI authority + human Director ratification, but each org adapts).
 
-```json
-"governance_model": "Bounded AI authority + human-maintainer ratification. AI sessions draft, validate, decide, sign off; human maintainers merge. Vendors do not own the spec."
-```
+### `items` (array of typed objects)
+
+The roster + specializations that compose the org. Every orgdef MUST declare at least one item of type `orgdef:Position`. See **Items** section.
 
 ### `metadata` (object)
 
-Authorship, licensing, attribution, version history, related orgs.
+Provenance + history per catdef metadata convention. See **Metadata** section.
+
+---
+
+## Recommended catalog-level fields (SHOULD)
+
+### `vision` (string)
+
+Why the org exists; what world it's working toward. Often the OAGP-family-style two-clause structure (noun-phrase first clause + primary-reader-is-AI invariant clause).
+
+### `scope` (string)
+
+What the org covers and explicitly does NOT cover. Negative-scope-as-definition often clarifies positive scope.
+
+### `values` (array of objects)
+
+What the org cares about; load-bearing for tie-breaking decisions. Each value: `{ name, description, rationale }`.
+
+### `red_lines` (array of objects)
+
+What the org WILL NOT do, regardless of pressure. Each red_line: `{ rule, rationale }`.
+
+### `recommended_patterns` (object)
+
+Patterns the org recommends for adopters deriving from this orgdef. Two sub-arrays:
+- `general`: structural patterns, each `{ pattern, description, rationale }`
+- `recommended_roles`: roles the org recommends, each `{ role, priority, why }` where `role` is either a bare-string id or a coordinate object `{ id, version, url }`
+
+### `relationships` (array of `orgdef:Relationship` objects)
+
+Typed edges between positions. Lightweight; catalog-level array (not items). Each relationship: `{ type, from, to, description }` where `type` ∈ {`reports_to`, `peer_of`, `derives_from`, `validates_for`, `implements_for`, `coordinates_with`, `directs`}.
+
+---
+
+## Items: positions and jobs
+
+Items are the typed things in the orgdef catalog. Each item MUST have a `type` field carrying a catdef-family substrate type tag.
+
+### `orgdef:Position` item
+
+A role/seat in the organization.
+
+```json
+{
+  "type": "orgdef:Position",
+  "id": "<position-id>",
+  "name": "<human-readable>",
+  "status": "staffed" | "vacant" | "shared",
+  "role_definition": { "id": "...", "version": "...", "url": "..." } | null,
+  "job_definition": { "id": "...", "version": "..." } | null,
+  "description": "...",
+  "incumbent": { ... } | null,
+  "x.<domain>.<identifier>": ...
+}
+```
+
+**Required position fields (MUST):**
+- `type` — exactly `"orgdef:Position"`
+- `id` — kebab-case, unique within the org's items
+- `status` — one of `"staffed"`, `"vacant"`, `"shared"`
+
+**Recommended position fields (SHOULD):**
+- `name` — display name
+- `description` — what the position does
+- `role_definition` — reference to a canonical roledef (id + version + url). Roledefs are external (typically at roledef.org); resolved by fetch.
+- `job_definition` — reference to an `orgdef:Job` item in the same opencatalog by `{ id, version }`. URL is optional fallback for cross-org reference cases. When the job is local (same opencatalog), URL MAY be omitted.
+- `incumbent` — who currently occupies the position: `{ kind: "human" | "ai", identifier | session_arc, portable?, portable_via?, notes? }`
+
+### `roledef:Job` item
+
+A job specialization that binds an org-specific responsibility set to a position. Embedded in the orgdef.opencatalog rather than authored as a standalone file. Full `roledef:Job` shape per the roledef SCHEMA — including `charter`, `identity`, `voice`, `output_contract`, `guardrails`, `metadata.role_definition`, `metadata.org_definition`, `metadata.placement`.
+
+```json
+{
+  "type": "roledef:Job",
+  "id": "<job-id>",
+  "version": "<semver>",
+  "charter": "...",
+  "identity": "...",
+  "voice": "...",
+  "output_contract": [...],
+  "guardrails": [...],
+  "metadata": {
+    "role_definition": { "id": "...", "version": "...", "url": "..." },
+    "org_definition": { "id": "...", "version": "...", "url": "..." },
+    "placement": { "reports_to": "...", "directs": [...], "coordinates_with": [...] },
+    ...
+  }
+}
+```
+
+The Job item's `id` MUST match the `job_definition.id` of the position it specializes. The Job item's `version` SHOULD match the position's `job_definition.version`.
+
+For complete `roledef:Job` field definitions, see the [roledef SCHEMA](https://github.com/roledef-spec/roledef/blob/main/SCHEMA.md). The orgdef spec defers to roledef on Job item content; orgdef only specifies that Job items embed in the orgdef.opencatalog rather than living as separate files.
+
+---
+
+## Internal consistency (validators MUST check)
+
+- Every `relationships[].from` and `relationships[].to` MUST resolve to a Position item's `id` in the same opencatalog.
+- Every Position item's `job_definition.id` (when present) MUST resolve to a Job item's `id` in the same opencatalog (unless `job_definition.url` declares an external job).
+- Position item `id`s MUST be unique within the opencatalog.
+- Job item `id`s MUST be unique within the opencatalog.
+- Position and Job ids MAY share names (a Position with id `implementer` and a Job item with id `implementer` is a common pattern — the position is specialized by the job of the same id).
+
+---
+
+## Metadata (catalog-level)
 
 ```json
 "metadata": {
   "authors": ["..."],
   "license": "MIT",
-  "created": "2026-04-26",
+  "created": "YYYY-MM-DD",
   "extracted_from": "...",
-  "related": ["..."],
-  "homepage": "https://orgdef.org/orgs/<id>",
-  "repository": "https://github.com/orgdef-spec/orgdef/blob/main/orgs/<id>.openthing",
-  "history": [...]
+  "homepage": "...",
+  "repository": "https://github.com/.../<id>-organization.opencatalog",
+  "history": [
+    { "version": "x.y.z", "date": "YYYY-MM-DD", "change": "..." }
+  ],
+  "derived_from": { "id": "...", "version": "...", "url": "..." },
+  "kind": "operational" | "canonical-template",
+  "v1_success_criterion": "..."
 }
 ```
 
----
-
-## Position structure (`orgdef:Position`)
-
-Each entry in the `positions` array is a position object.
-
-### Required fields (MUST)
-
-#### `id` (string)
-
-Short, kebab-case identifier for the position. Used in `relationships` to reference this position. Unique within the org.
-
-```json
-"id": "catdef-strategist"
-```
-
-#### `name` (string)
-
-Human-readable name of the position.
-
-```json
-"name": "catdef Strategist"
-```
-
-#### `status` (enumerated string)
-
-The current operational status of the position. One of:
-
-- `staffed` — currently occupied by an incumbent (human, AI session arc, or other agent)
-- `vacant` — defined but not currently occupied
-- `shared` — occupied by multiple incumbents simultaneously
-- `informal` — operationally active but not yet formalized (no incumbent declared)
-
-```json
-"status": "staffed"
-```
-
-### Recommended fields (SHOULD)
-
-#### `role_definition` (object)
-
-Reference to the roledef that defines what this position IS. Object with `id` + `version` + `url`. The url SHOULD point at a canonical roledef library URL.
-
-```json
-"role_definition": {
-  "id": "catdef-strategist",
-  "version": "2.0.0",
-  "url": "https://roledef.org/roledefs/catdef-strategist.openthing"
-}
-```
-
-When a position has no `role_definition` reference, the position's behavior is informal — the position exists but its role hasn't been roledef-extracted. This is acceptable for v0.1 bootstrapping; orgdefs SHOULD migrate informal positions to roledef-referenced positions over time.
-
-#### `incumbent` (string or object)
-
-Who currently occupies the position. May be a string (free-form name or session arc identifier) or an object with structured fields (name, kind: human/ai/group, contact, etc.). v0.1 leaves this loosely typed; future spec versions may tighten.
-
-```json
-"incumbent": "scott (human steward)"
-```
-
-```json
-"incumbent": {
-  "kind": "ai",
-  "session_arc": "session that bootstrapped catdef + roledef + orgdef across 2026-04-25 to 2026-04-26",
-  "portable": true,
-  "portable_via": "https://roledef.org/roledefs/catdef-strategist.openthing"
-}
-```
-
-#### `description` (string)
-
-Brief description of what this position does within this organization specifically (organization-specific framing, complementary to but distinct from the roledef's role-level description).
-
-#### `notes` (string or array)
-
-Free-form notes about the position — informal context, history, transitional state.
-
----
-
-## Relationship structure (`orgdef:Relationship`)
-
-Each entry in the `relationships` array is a relationship object.
-
-### Required fields (MUST)
-
-#### `type` (enumerated string)
-
-The kind of relationship. orgdef v0.1 defines these standard types:
-
-- `reports_to` — hierarchical authority. `from` is subordinate; `to` is authority.
-- `peer_of` — collaborative co-equal. Symmetric; both `from` and `to` are at the same level.
-- `derives_from` — derivation lineage. `from` is the derived role; `to` is the parent. Mirrors roledef's `metadata.derived_from` at the org level.
-- `validates_for` — validator → contributor pattern. `from` validates submissions from `to`.
-- `implements_for` — implementor → spec pattern. `from` implements work that `to` strategically directs.
-- `coordinates_with` — cross-spec or cross-org coordination. Symmetric; both `from` and `to` are coordinating equals.
-- `drafts_for` — drafter → ratifier pattern. `from` produces drafts; `to` ratifies / merges.
-
-Custom relationship types MAY be expressed via the `x.` extension namespace (e.g., `x.healthcare.consults_for`). Standard types SHOULD be preferred when applicable.
-
-```json
-"type": "reports_to"
-```
-
-#### `from` (string)
-
-The position id at the source of the relationship.
-
-```json
-"from": "catdef-strategist"
-```
-
-#### `to` (string)
-
-The position id at the target of the relationship.
-
-```json
-"to": "human-steward"
-```
-
-### Recommended fields (SHOULD)
-
-#### `description` (string)
-
-Brief description of the specific relationship in this org's context. Distinguishes orgs that share the same relationship type but apply it differently.
-
-```json
-"description": "Strategist drafts decisions and signs off; human steward merges. No autonomous merge authority."
-```
-
-#### `bidirectional` (boolean, default false)
-
-For inherently symmetric relationship types (`peer_of`, `coordinates_with`), `bidirectional: true` declares the relationship explicitly so renderers know to draw it as undirected. Asymmetric types (`reports_to`, `validates_for`, etc.) leave this unset (defaults to false / directed).
-
----
-
-## Top-level structure: `orgdef:Library`
-
-A catalog of orgdef artifacts, used to index multiple orgs published by the same publisher. Same shape as catdef catalogs.
-
-```json
-{
-  "catdef": "1.4",
-  "orgdef": "0.1.0",
-  "type": "orgdef:Library",
-  "id": "<library-id>",
-  "name": "<human-readable name>",
-  "description": "...",
-  "version": "<semver>",
-  "data": {
-    "items": [
-      {
-        "id": "<org-id>",
-        "name": "...",
-        "version": "...",
-        "description": "...",
-        "file": "orgs/<org-id>.openthing",
-        ...
-      }
-    ]
-  },
-  "metadata": {...}
-}
-```
-
----
-
-## Extension fields (`x.` namespace)
-
-orgdef artifacts MAY include any number of extension fields under the `x.<domain>.<identifier>` namespace. Per the catdef-family self-description SHOULD-rule, each extension SHOULD carry a `description` field for naive-agent handling.
-
-Plausible extensions (illustrative, not normative):
-
-```
-"x.legal.jurisdiction": "..."
-"x.governance.charter_url": "..."
-"x.org.fiscal_year": "..."
-"x.org.compensation_band": {...}
-"x.healthcare.licensing_required": [...]
-```
-
----
-
-## Reserved namespaces
-
-The following namespaces are reserved by the orgdef spec and MUST NOT be used as adopter extensions:
-
-- `orgdef:*` — reserved for orgdef spec types and fields
-- `catdef:*` — reserved by catdef substrate
-- `x.orgdef.*` — reserved for orgdef-spec-coordinated extensions
-
-Adopters use their own `x.<domain>.<identifier>` namespaces.
-
----
-
-## Internal consistency rules
-
-A valid orgdef artifact MUST:
-
-1. Have at least one `position` and at least one `relationship`
-2. Have every `relationship.from` and `relationship.to` resolving to a position id within the same artifact
-3. Stamp a `catdef` version that defines every catdef feature used (writer-strict)
-4. Have unique position ids within the artifact
-
-A valid orgdef artifact SHOULD:
-
-1. Have at least one position with a `role_definition` reference (otherwise the artifact is a structure-only org with no role-behavior context — sometimes legitimate, often a sign of incomplete authoring)
-2. Have positions and relationships that together form a connected graph (disconnected sub-graphs may indicate authoring errors; intentional sub-graphs SHOULD be split into separate orgdef artifacts)
-3. Use standard relationship types when the relationship matches one; reserve `x.<domain>.<identifier>` extensions for genuinely domain-specific relationships
-
----
-
-## Future considerations (not in v0.1)
-
-These have come up in design discussion but are deferred to v0.2+:
-
-- **Authority boundaries.** Per-position `does_what` / `does_not_do_what` arrays mirroring roledef's `x.governance.boundary`. Worth promoting once 2-3 orgdefs have authored these informally.
-- **Time-bounded relationships.** `valid_from` / `valid_to` on relationships and positions for orgs that change over time.
-- **Cross-org references.** When this org coordinates with another org (e.g., catdef-org coordinates with the broader open-standards-org community), reference by id+url with declared relationship.
-- **Visualization hints.** `x.orgdef.layout_hints` for renderers that want author-suggested positioning.
-- **Conformance levels.** Multi-level conformance (L1: structural; L2: relationship-graph traversable; L3: full role-definition resolution).
-
-These belong to v0.2+ and will be triaged as orgdef matures.
+**Required (MUST):**
+- `license` — SPDX-shaped license string
+
+**Recommended (SHOULD):**
+- `authors` — declared authorship
+- `created` — original creation date
+- `repository` — canonical URL where the artifact lives
+- `history` — substantive evolution record
+- `kind` — `"operational"` for adopted orgs; `"canonical-template"` for slot-shaped templates
+
+`derived_from` (when present) declares lineage from a canonical-template or another orgdef. Carries `{ id, version, url }`.
 
 ---
 
 ## Versioning
 
-orgdef follows semver:
+orgdef SCHEMA semver:
+- **Major** — breaking shape changes (e.g., v0.x → v1.0 substrate-shape correction; future v1.x → v2.0 would be a similarly breaking move)
+- **Minor** — additive features (new optional fields, new item types, new relationship types)
+- **Patch** — clarifications, editorial improvements, validator-behavior refinements
 
-- **Patch** (0.1.X): clarifications, editorial fixes, no behavior changes
-- **Minor** (0.X.0): new optional fields, new standard relationship types, backward-compatible additions
-- **Major** (X.0.0): breaking changes (removed required fields, changed semantics)
-
-The schema version is independent from any individual artifact's `version` field.
+Per-artifact semver (the `version` field on each orgdef):
+- **Major** — substantive shape change in the artifact (substrate-shape migration, position-roster restructure, governance-model overhaul)
+- **Minor** — additive content (new position, new value, new pattern)
+- **Patch** — editorial fixes, metadata.history updates, non-substantive refinement
 
 ---
 
-## Examples
+## `orgdef:Library` (catalog of orgdefs)
 
-### Minimal `orgdef:Organization`
+A library aggregates multiple orgdefs by reference. Used for canonical-orgs collections.
 
 ```json
 {
   "catdef": "1.4",
-  "orgdef": "0.1.0",
-  "type": "orgdef:Organization",
-  "id": "minimal-org",
-  "name": "Minimal Example",
-  "version": "1.0.0",
-  "positions": [
-    { "id": "leader", "name": "Leader", "status": "staffed" },
-    { "id": "member", "name": "Member", "status": "staffed" }
+  "orgdef": "1.0.0",
+  "type": "orgdef:Library",
+  "id": "<library-id>",
+  "name": "<human-readable>",
+  "version": "<semver>",
+  "description": "...",
+  "items": [
+    { "type": "orgdef:Reference", "id": "...", "version": "...", "url": "..." },
+    ...
   ],
-  "relationships": [
-    { "type": "reports_to", "from": "member", "to": "leader" }
-  ]
+  "metadata": {...}
 }
 ```
 
-### Position with full role_definition reference
-
-```json
-{
-  "id": "catdef-strategist",
-  "name": "catdef Strategist",
-  "status": "staffed",
-  "role_definition": {
-    "id": "catdef-strategist",
-    "version": "2.0.0",
-    "url": "https://roledef.org/roledefs/catdef-strategist.openthing"
-  },
-  "incumbent": {
-    "kind": "ai",
-    "session_arc": "bootstrapping session 2026-04-25 to 2026-04-26",
-    "portable": true,
-    "portable_via": "https://roledef.org/roledefs/catdef-strategist.openthing"
-  },
-  "description": "Stewards the catdef substrate spec and coordinates catdef-family ecosystem decisions."
-}
-```
-
-### Standard relationship types in use
-
-```json
-{ "type": "reports_to", "from": "catdef-strategist", "to": "human-steward", "description": "Drafts and signs off; steward merges." }
-{ "type": "peer_of", "from": "catdef-strategist", "to": "roledef-strategist", "description": "Sister strategist roles; both derived from senior-open-standards-strategist.", "bidirectional": true }
-{ "type": "derives_from", "from": "catdef-strategist", "to": "senior-open-standards-strategist", "description": "Derived per roledef metadata.derived_from declaration (catdef-strategist v2.0.0)." }
-{ "type": "validates_for", "from": "roledef-validator", "to": "roledef-contributor", "description": "Validates schema-conformance of submitted roledefs." }
-{ "type": "implements_for", "from": "catdef-canonical-implementor", "to": "catdef-strategist", "description": "Implements catdef.org Worker code per strategist build directives." }
-{ "type": "coordinates_with", "from": "catdef-org", "to": "roledef-org-related-artifacts", "description": "Cross-spec coordination for substrate-vs-consumer decisions.", "bidirectional": true }
-{ "type": "drafts_for", "from": "catdef-maintainer", "to": "human-steward", "description": "Drafts spec text (CATDEF_SPEC.md, etc.); steward merges." }
-```
+Library items are references, not embedded orgdefs (orgdefs at scale are large; libraries reference them by URL).
 
 ---
 
-## Status
+## Extension namespace
 
-**v0.1.0 — bootstrap.** This schema is being authored alongside the first orgdef artifact (catdef-org). Both are likely to iterate as we discover what the schema actually needs to support. Stable shape expected by v0.1.x; substantive changes go through the proposal workflow per CONTRIBUTING.md.
+orgdef inherits catdef's `x.<domain>.<identifier>` extension pattern. Established extensions in the family:
+
+- `x.org.org_location` — canonical hosting location with protocol discriminator + optional mirror list
+- `x.org.memo_location` — per-org override for memo placement (default: `<project>/memos/`)
+- `x.position.lifecycle` — position lifecycle marker (`"forward-looking"` | `"operational"` | `"transitional-shared"`)
+- `x.position.linked_orgs` — sub-org linking at position nodes (deferred; future proposal)
+
+Custom adopter extensions: any `x.<adopter-domain>.<identifier>`.
+
+---
+
+## Migration from v0.x
+
+v0.x orgdef.openthing artifacts migrate to v1.0.0 orgdef.opencatalog as follows:
+
+1. Open the v0.x orgdef.openthing artifact
+2. Promote its top-level fields (mission, vision, scope, etc.) to catalog-level fields
+3. Each entry in the old `positions[]` array becomes a `{ "type": "orgdef:Position", ... }` item in the new `items[]` array
+4. For each Position with a `job_definition.url` pointing at a separate `<project>/org/jobs/<job-id>.openthing` file: open that job artifact, embed its content as a `{ "type": "roledef:Job", ... }` item in the same `items[]` array; replace the position's `job_definition` with `{ id, version }` (drop the URL since the job is local)
+5. Bump the artifact's `version` major (substrate-shape change)
+6. Bump the artifact's `orgdef` field to `"1.0.0"`
+7. Rename the file from `<id>-organization.openthing` to `<id>-organization.opencatalog`
+8. Append a `metadata.history` entry recording the substrate migration
+9. Delete the old `<project>/org/jobs/` directory (its content now lives in items)
+
+The five spec-org operational orgs + thingalog + openbraid-org + canonical-orgs library entry + canonical-template all migrated as part of the orgdef SCHEMA v1.0.0 ship (2026-05-10).

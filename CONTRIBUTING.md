@@ -147,13 +147,33 @@ Adopters who previously created an alternative directory category for intra-org 
 
 ## Operational org-artifact filename conventions
 
-Per the canonical-template v1.2.0 instantiation_notes (11), operational org-artifact files SHOULD be named `<id>-organization.openthing` and placed at `<project>/org/`. The `-organization` suffix encodes artifact type at the filename level so the file is self-readable in isolation; the `<id>` portion remains the org's machine identifier and matches the artifact's `id` field. Adopters whose layout makes `<project>/org/` impractical MAY declare an alternative path via the `x.org.org_location` per-org extension on the orgdef artifact, following the same escape-hatch pattern as `x.org.memo_location`. Default convention when the extension is absent is `<project>/org/<id>-organization.openthing`.
+Per the canonical-template v2.0.0 / orgdef SCHEMA v1.0.0 substrate-shape decision (2026-05-10), operational org-artifact files SHOULD be named `<id>-organization.opencatalog` and placed at `<project>/org/`. The `-organization` suffix encodes artifact type at the filename level so the file is self-readable in isolation; the `<id>` portion remains the org's machine identifier and matches the artifact's `id` field. Adopters whose layout makes `<project>/org/` impractical MAY declare an alternative path via the `x.org.org_location` per-org extension on the orgdef artifact, following the same escape-hatch pattern as `x.org.memo_location`. Default convention when the extension is absent is `<project>/org/<id>-organization.opencatalog`.
 
-Job artifacts (`roledef:Job` per the role-vs-job distinction) live at `<project>/org/jobs/<job-id>.openthing` — no `-organization` suffix; job artifacts are self-typed via the `roledef:Job` type tag.
+## Job artifacts are items, not files
 
-Adopters whose operational orgdef artifact uses the prior convention `<project>/org/<id>.openthing` (no suffix; the v1.1.0 placement convention) SHOULD migrate to `<project>/org/<id>-organization.openthing` when convenient. The artifact's `id` field is unchanged; only the filename gains the suffix. Cross-spec references that resolve org artifacts by id (e.g., `metadata.org_definition.id` in `roledef:Job` artifacts) remain valid; cross-spec references that resolve by URL (e.g., `metadata.org_definition.url`) MUST update to the new filename path.
+Per orgdef SCHEMA v1.0.0 (substrate-shape correction landing 2026-05-10), `roledef:Job` artifacts live as **items inside the parent orgdef.opencatalog**, NOT as separate files in `<project>/org/jobs/`. The `<project>/org/jobs/` directory is RETIRED — its content moves into the parent orgdef's `items[]` array as `{ "type": "roledef:Job", ... }` entries.
 
-The parallel canonical-orgs library convention (`<project>/orgs/`) currently uses a `-org` suffix on its first artifact; alignment with the operational `-organization` suffix is deferred to the v0.3 SCHEMA bundle.
+Positions reference their job specializations via `position.job_definition: { id, version }` — no URL needed because the job is in the same opencatalog. URL becomes optional fallback for cross-org reference cases.
+
+This makes orgdefs atomically transportable: one file carries the entire org charter + position roster + role specializations. The Director's framing 2026-05-10: "An orgdef should be an atomic thing." Single-file transport, single-file mirror sync, single-file export.
+
+The five spec-org operational orgs + thingalog + openbraid-org migrated to opencatalog shape as part of the SCHEMA v1.0.0 ship. v0.x adopters MUST migrate per the SCHEMA Migration section.
+
+## Migration from v0.x orgdef.openthing
+
+Existing v0.x orgdef.openthing artifacts (+ their separate org/jobs/ files) migrate to v1.0.0 orgdef.opencatalog per these steps:
+
+1. Open the v0.x orgdef.openthing artifact
+2. Promote top-level fields (mission, vision, scope, governance_model, values, red_lines, recommended_patterns, relationships, metadata) to catalog-level fields
+3. Each entry in the old `positions[]` array becomes a `{ "type": "orgdef:Position", ... }` item in the new `items[]` array
+4. For each Position with a `job_definition.url` pointing at a separate `<project>/org/jobs/<job-id>.openthing` file: open that job artifact, embed its content as a `{ "type": "roledef:Job", ... }` item in the same `items[]` array; replace the position's `job_definition` with `{ id, version }` (drop the URL since the job is local)
+5. Bump the artifact's `version` major (substrate-shape change)
+6. Bump the artifact's `orgdef` field to `"1.0.0"`
+7. Rename the file from `<id>-organization.openthing` to `<id>-organization.opencatalog`
+8. Append a `metadata.history` entry recording the substrate migration
+9. Delete the old `<project>/org/jobs/` directory (its content now lives in items)
+
+Cross-spec references that resolve org artifacts by id (e.g., `metadata.org_definition.id` in `roledef:Job` artifacts) remain valid; cross-spec references that resolve by URL (e.g., `metadata.org_definition.url`) MUST update to the new filename path (`.opencatalog`).
 
 ## Canonical OAGP position addressing
 
@@ -171,7 +191,7 @@ Two-segment URLs (`<scheme>://<host>/<account>/<position>`) accepted as syntacti
 
 The URL shape is protocol-agnostic. Examples:
 
-- **https (git-hosted):** `https://github.com/scott/thingalog/blob/master/org/jobs/product-strategist.openthing` — for git-hosted orgs the canonical URL IS the GitHub blob URL.
+- **https (git-hosted):** `https://github.com/scott/thingalog/blob/master/org/thingalog-organization.opencatalog` — for git-hosted orgs the canonical URL IS the GitHub blob URL of the orgdef.opencatalog file. Position resolution is via the URL's `?position=<id>` query fragment OR within-document anchor; renderer + openbraid implementations agree on the resolution mechanism.
 - **mcp (openbraid-hosted):** `mcp.openbraid.app/scott/thingalog/product-strategist`
 - **mcp (self-hosted openbraid):** `mcp.firstchurch.org/treasurer` (two-segment sugar; account hosts one org)
 
@@ -226,7 +246,7 @@ A consequence of canonical position addressing: the fresh-agent instantiation pr
 
 ### Full-fidelity export as anti-lock-in escape valve
 
-An org hosted on openbraid (or any hosted service) can export its full orgdef artifact at any time as a portable `.openthing` file. The exported artifact can be republished elsewhere (git repo, self-hosted openbraid, archived as a static file, transferred to a different hosting service). This is the load-bearing property that prevents hosting from becoming lock-in: the artifact is portable; the hosting is choice.
+An org hosted on openbraid (or any hosted service) can export its full orgdef artifact at any time as a portable `.opencatalog` file. The exported artifact can be republished elsewhere (git repo, self-hosted openbraid, archived as a static file, transferred to a different hosting service). This is the load-bearing property that prevents hosting from becoming lock-in: the artifact is portable; the hosting is choice. Per orgdef v1.0.0 substrate-shape correction, the .opencatalog is atomically transportable — entire org charter + position roster + job specializations in one file.
 
 ## Strategist bot identity
 

@@ -1,0 +1,192 @@
+{
+  "catdef": "1.4",
+  "orgdef": "1.0.0",
+  "type": "orgdef:Organization",
+  "id": "oagp-family-open-standard",
+  "name": "OAGP-Family Open Standard (Canonical Template)",
+  "version": "2.0.0",
+
+  "mission": "[SLOT: 1–2 sentences stating what THIS spec defines and the open machine-readable artifact it produces. Pick the example shape that matches your spec's category — bootstrap-shaped (loading-AI-into-role), coordinative (inter-position handoff), or substrate (format-providing) — and adapt: BOOTSTRAP example: 'Define X in an open, machine-readable way that bootstraps any AI worker into Y with zero context backfill.' COORDINATIVE example: 'Define X-message exchange between positions in an open, machine-readable way that bootstraps a recipient AI session into an inter-position handoff with zero context backfill.' SUBSTRATE example: 'Define X in an open, machine-readable way that provides the substrate format on which consumer specs build.']",
+
+  "vision": "Part of the Open Agentic Governance Pattern (OAGP) family — alongside catdef, roledef, orgdef, and memodef — defining the pattern of [SLOT: noun-phrase naming what aspect of AI-first organization this spec addresses]. The primary reader of [SLOT: this spec's primary artifact type] is an AI; [SLOT: any spec-specific framing of the cross-org or cross-runtime use case].",
+
+  "scope": "[SLOT: scope statement — what this spec covers and explicitly excludes. Reference adjacent OAGP-family specs and what's out of scope. Example shape: 'The X schema, conformance test suite, canonical-X library, and reference implementations. Out of scope: enforcing what consumers build (content-neutral), runtime infrastructure (specification only), substrate-level concerns belonging to catdef.']",
+
+  "governance_model": "Bounded AI authority + human Director ratification. The [SLOT: spec-name]-strategist (AI role) holds delegated authority for design decisions; the [SLOT: spec-name]-maintainer (AI role, separate seat) drafts spec text and conformance fixtures; the human Director holds final tiebreaker authority on every merge, version bump, and governance change. Mirrors the catdef-family pattern.",
+
+  "values": [
+    {
+      "name": "openness",
+      "description": "[SLOT: spec-name] is fundamentally open — a pattern, not a product. No vendor lock-in, no privileged implementer, no proprietary extensions in the core spec. All AI runtimes (Anthropic, OpenAI, xAI, Google, future) are equal citizens.",
+      "rationale": "Adoption depends on equal-citizen treatment of all implementers; vendor capture would defeat the standard's purpose. Forks are welcome — anyone can publish their own [SLOT: spec-name] library at any URL using the same format."
+    },
+    {
+      "name": "completeness",
+      "description": "[SLOT: spec's primary artifact] MUST be sufficient — alone or composed with other OAGP-family artifacts — for a fresh AI runtime to act on its content with zero context backfill.",
+      "rationale": "Hallucination-prevention rule, not aesthetic preference. The primary reader is a machine; null context invites confabulation. A [SLOT: artifact-class] missing required structural content forces the AI to either guess or ask the user, which violates the zero-friction bar."
+    }
+  ],
+
+  "red_lines": [
+    {
+      "rule": "No NULL-context [SLOT: spec's primary artifact type] accepted by the spec, the validator, or the canonical [SLOT: spec-specific facilitator name if applicable, otherwise 'authoring tool'].",
+      "rationale": "Technical, not aesthetic — null context causes hallucination in the primary (machine) reader. The MUST-have-substantive-[SLOT: charter/equivalent for this spec] rule is a hallucination-prevention rule, not a quality preference."
+    },
+    {
+      "rule": "No content policing of consumers.",
+      "rationale": "What organizations choose to build using the [SLOT: spec-name] pattern is their business, not the spec's. [SLOT: spec-name] governs the pattern's integrity, not the morality of its applications. Curation happens at the LIBRARY level (canonical inclusion), not the SPEC level."
+    }
+  ],
+
+  "recommended_patterns": {
+    "general": [
+      {
+        "pattern": "Senior strategist role separation",
+        "description": "Specs SHOULD have a senior strategist role distinct from execution roles (maintainer, implementor), so each position stays in its lane.",
+        "rationale": "Same reason developers shouldn't do their own security testing — bounded scope per role enables clean handoffs and prevents authority concentration."
+      },
+      {
+        "pattern": "Two-section charter discipline",
+        "description": "Organize orgdef content into two implicit sections: 'how this org operates' (mission, vision, values, governance, positions, relationships, red_lines) vs 'what we recommend for orgs using this pattern' (recommended_patterns). The two sections serve different audiences.",
+        "rationale": "First section orients a reader joining this spec org; second section guides anyone deriving a new org from this one as a template. Conflating them muddles both audiences."
+      },
+      {
+        "pattern": "Recursive self-describing v1 milestone",
+        "description": "Treat 'this very orgdef exists as a valid, self-describing artifact in the org folder' as the spec's v1 success criterion.",
+        "rationale": "If the pattern can't bootstrap its own author, it can't bootstrap anyone. Self-description is the most demanding test case for a standards project."
+      },
+      {
+        "pattern": "memos/ as the universal inter-position communication channel",
+        "description": "Inter-position communications — strategist→implementer, strategist→specialist, strategist→peer-strategist (intra-org), cross-org, cross-spec — SHOULD use memodef:Memo artifacts placed in the recipient's working-repo `memos/` directory. memodef:Memo with `action_required: true` covers the operational-handoff case; with `action_required: false` covers FYI / institutional-memory comms. Adopters whose layout makes `memos/` impractical at the canonical path MAY declare an alternative via the `x.org.memo_location` extension on their orgdef artifact.",
+        "rationale": "Bifurcating inter-position comms across multiple directory categories propagates artifact-category ambiguity to every adopter, miscategorizes mid-line cases (cross-spec coordination + action-required + build-directive memos), and trades AI-legibility for hand-authoring ergonomics. memodef:Memo is content-neutral on intra-vs-cross-position scope; memos/ is the family channel. Hand-authoring ergonomic friction (body-as-JSON-string for multi-paragraph operational content) is resolved by the memodef v0.2.0 `body_ref` OPTIONAL field (sibling `.body.md` files, co-located, with `body` carrying a triage summary); resolving the friction inside memodef preserves the universal-channel value of memos/."
+      },
+      {
+        "pattern": "Canonical OAGP position addressing (URL-as-instruction)",
+        "description": "OAGP-family positions are canonically addressed via URLs with three levels: `<scheme>://<host>/<account>` returns ordered list of orgs; `<scheme>://<host>/<account>/<org>` returns positions ordered by depth-first path walk (work-stream from authority to execution to validation, then sibling branches); `<scheme>://<host>/<account>/<org>/<position>` returns the fresh-agent boot payload (org summary + role definition + job specializations + inbox state + claim instruction). Two-segment URLs (`<account>/<position>`) accepted as syntactic sugar when an account hosts exactly one org. Cross-protocol equivalence: https for git-hosted orgs (canonical URL is the github.com blob URL of the orgdef.opencatalog); mcp for openbraid-hosted orgs (`mcp.openbraid.app/<account>/<org>/<position>`); future protocols accepted with same URL shape. Self-host parity: `mcp.openbraid.app` is the default openbraid host; self-hosted instances at any host (`mcp.firstchurch.org`, etc.) speak the same protocol. The `x.org.org_location` extension carries the protocol discriminator, optionally as a list when an org maintains mirrors (git for auditability + openbraid for runtime accessibility); one entry MAY be marked `authoritative: true` as source-of-truth.",
+        "rationale": "URL-as-instruction collapses fresh-agent instantiation prompt design from variant-explosion (separate prompt shapes for git+filesystem, openbraid+MCP, explicit-fetch wrapper, paste-fallback) to one invariant shape: 'You are <name>. Read <url> for your full assignment.' Every AI runtime since 2020 handles URLs natively while none parse multi-paragraph natural-language org descriptions reliably; AI-legibility primacy is maximally satisfied. Cross-protocol equivalence preserves equal-citizen treatment of hosting mechanisms (git for software orgs; openbraid for non-software orgs that won't adopt git literacy as the price of admission), parallel to the family's equal-citizen treatment of AI runtimes. Self-host parity prevents lock-in at the hosting layer."
+      },
+      {
+        "pattern": "Atomic-transportable orgdef (substrate-shape correction)",
+        "description": "orgdef artifacts are `.opencatalog` files — single transportable bundle carrying the entire org charter (catalog-level fields) + position roster + job specializations (items). Job artifacts are NOT separate files; they live as `{ \"type\": \"roledef:Job\", ... }` items inside the parent orgdef.opencatalog. The orgdef IS atomically one thing — substrate-shape correction landed in orgdef SCHEMA v1.0.0 (2026-05-10).",
+        "rationale": "Per Director's framing: 'An orgdef should be an atomic thing.' Single-file transport enables clean mirror sync (file copy, not bundle assembly), clean export (one file out, not multi-file payload), clean cross-protocol hosting (git ↔ openbraid byte-equivalent). Avoids the lossy translation costs of the pre-v1.0 multi-file shape."
+      }
+    ],
+    "recommended_roles": [
+      {
+        "role": "human-director",
+        "priority": "MUST",
+        "why": "Bounded-authority discipline requires a human ratifier."
+      },
+      {
+        "role": {
+          "id": "senior-open-standards-strategist",
+          "version": "1.0.0",
+          "url": "https://roledef.org/roledefs/senior-open-standards-strategist.openthing"
+        },
+        "priority": "MUST",
+        "why": "Library-curation, scope-narrowing, pattern-promotion calls."
+      },
+      {
+        "role": "[SLOT: spec-name]-maintainer",
+        "priority": "MUST",
+        "why": "Drafts spec text, walks SCHEMA validations, files decision artifacts."
+      },
+      {
+        "role": "canonical-implementor",
+        "priority": "SHOULD",
+        "why": "Reference renderers and validators are how the spec gets dogfooded."
+      }
+    ]
+  },
+
+  "v1_success_criterion": "[SLOT: spec-name] ships v1 when this very orgdef exists as a valid, self-describing orgdef:Organization opencatalog artifact in the [SLOT: spec-name] org folder, conformant to a published [SLOT: spec-name] SCHEMA.md — proving the pattern can describe itself using itself.",
+
+  "relationships": [
+    {
+      "type": "reports_to",
+      "from": "strategist",
+      "to": "director",
+      "description": "[SLOT: standard inherited; strategist holds delegated authority, Director ratifies decisions/merges/version-bumps/governance-changes]"
+    },
+    {
+      "type": "directs",
+      "from": "strategist",
+      "to": "maintainer",
+      "description": "[SLOT: standard inherited; strategist makes calls, maintainer drafts spec text in support of those calls]"
+    },
+    {
+      "type": "directs",
+      "from": "strategist",
+      "to": "canonical-implementor",
+      "description": "[SLOT: standard inherited if implementor position present; strategist sets direction for canonical tooling priorities]"
+    }
+  ],
+
+  "items": [
+    {
+      "type": "orgdef:Position",
+      "id": "director",
+      "name": "Director",
+      "description": "[SLOT: human Director with final tiebreaker authority. No role_definition (humans are not derived from roledefs). Derivers replace this with their actual Director's name or leave generic.]"
+    },
+    {
+      "type": "orgdef:Position",
+      "id": "strategist",
+      "name": "Strategist",
+      "description": "[SLOT: derive a job from senior-open-standards-strategist specialized to your spec. Reference here via job_definition: { id, version } (URL omitted because the job is a sibling item in this opencatalog). Add a corresponding { 'type': 'roledef:Job', 'id': '<spec>-strategist', ... } item to this opencatalog's items array with the full job content.]"
+    },
+    {
+      "type": "orgdef:Position",
+      "id": "maintainer",
+      "name": "Maintainer",
+      "description": "[SLOT: derive a job for [spec-name]-maintainer (drafts spec text, walks SCHEMA validations, files decision artifacts). Reference via job_definition and add the corresponding roledef:Job item.]"
+    },
+    {
+      "type": "orgdef:Position",
+      "id": "canonical-implementor",
+      "name": "Canonical Implementor",
+      "description": "[SLOT: OPTIONAL. Derive a job for canonical-implementor specialized to your spec (reference renderers, validators, test fixtures). Reference via job_definition and add the corresponding roledef:Job item. Omit position if your spec doesn't need this role.]"
+    }
+  ],
+
+  "metadata": {
+    "kind": "canonical-template",
+    "authors": [
+      "orgdef-strategist <orgdef-strategist@orgdef.org>"
+    ],
+    "license": "MIT",
+    "created": "2026-04-26",
+    "extracted_from": "Generalized from orgdef-spec/orgdef-spec-org/orgdef.openthing v1.0.0, the dogfood orgdef that proved out the pattern. Generalization preserves values, red_lines, and recommended_patterns verbatim (those are the load-bearing OAGP-family invariants); replaces orgdef-specific content (mission, scope, positions specifics) with [SLOT:...] placeholders for derivers to fill.",
+    "homepage": "https://orgdef.org/canonical-orgs/oagp-family-open-standard",
+    "repository": "https://github.com/orgdef-spec/orgdef/blob/main/proposed-orgs/oagp-family-open-standard.opencatalog",
+    "history": [
+      {
+        "version": "1.0.0",
+        "date": "2026-04-26",
+        "change": "Initial canonical template, extracted from orgdef-spec/orgdef-spec-org/orgdef.openthing v1.0.0. First entry in the canonical-orgs/ library."
+      },
+      {
+        "version": "1.1.0",
+        "date": "2026-04-30",
+        "change": "Patches per decisions/proposal-canonical-template-v1.1-and-placement-convention.md: three mission example shapes (bootstrap/coordinative/substrate); vision drops orgdef-specific 'introduction artifact' clause; instantiation_notes additions; placement convention <spec>/<spec>-org/orgdef.openthing → <spec>/org/<id>.openthing."
+      },
+      {
+        "version": "1.2.0",
+        "date": "2026-05-01",
+        "change": "Bundled patches: (a) inter-position-communication-convention recommended_patterns.general entry; (b) operational-org-artifact-naming-convention instantiation_notes (11) update (filename <id>-organization.openthing)."
+      },
+      {
+        "version": "1.3.0",
+        "date": "2026-05-02",
+        "change": "Adds recommended_patterns.general entry 'Canonical OAGP position addressing (URL-as-instruction)' per decisions/proposal-canonical-oagp-position-addressing.md."
+      },
+      {
+        "version": "2.0.0",
+        "date": "2026-05-10",
+        "change": "MAJOR: substrate-shape correction per decisions/proposal-orgdef-as-opencatalog-substrate-shape.md. orgdef SCHEMA bumped v0.3.0 → v1.0.0; canonical-template substrate changes from .openthing to .opencatalog (atomic-transportable bundle with positions + jobs as items). Positions migrated to items[] array with `type: orgdef:Position` tag; job artifacts now embedded as items (`type: roledef:Job`) rather than separate files; relationships stay at catalog level (lightweight); v1_success_criterion mentions opencatalog. Added recommended_patterns.general entry 'Atomic-transportable orgdef (substrate-shape correction)' documenting the change. instantiation_notes (11) updated for opencatalog placement; instantiation_notes (14) NEW — 'Job artifacts as items, not files.' Filename: oagp-family-open-standard.opencatalog (was .openthing). Director ratification 2026-05-10: 'Path B, all the way. This is my failure, I did not notice that we had not done this.' Window-of-opportunity migration during development phase (one user, six operational artifacts migrated atomically)."
+      }
+    ],
+    "derivation_conventions": "Per the additive-only derivation discipline per orgdef SCHEMA.md: derivers MAY add to values, red_lines, recommended_patterns; SHOULD NOT remove canonical entries (those are family-level invariants). Mission, scope, items (positions+jobs), relationships are derivation-specific (REPLACE, don't extend) — but REPLACE for mission/vision still expects family-resemblance in shape (zero-context-backfill framing, OAGP-family identification, primary-reader-is-AI), even when the noun-phrases differ. Vision and governance_model are inheritable-or-refinable.",
+    "instantiation_notes": "When deriving from this template:\n\n(1) Replace all [SLOT:...] placeholders with concrete content. Mission's three example shapes (bootstrap / coordinative / substrate) cover the empirically observed OAGP-family categories.\n\n(2) Add metadata.derived_from pointing at this canonical artifact (id + version + url).\n\n(3) Author your own items (positions + jobs). For each non-trivial position, add a corresponding `{ \"type\": \"roledef:Job\", ... }` item with the full job content; reference from the position via `job_definition: { id, version }` (URL omitted since job is local).\n\n(4) Set metadata.kind to 'operational'.\n\n(5) Optionally add new entries to values, red_lines, recommended_patterns (do NOT remove canonical entries).\n\n(6) Optionally refine vision and governance_model within bounds (preserve family-resemblance in shape).\n\n(7) Vision is one slot doing two jobs: a noun-phrase first clause (specific to your spec) and a primary-reader-is-AI invariant clause (mostly boilerplate). Fill the noun-phrase precisely; preserve the boilerplate's shape.\n\n(8) recommended_roles representation: use bare-string `role` values for in-org roles or for roles whose canonical roledef hasn't yet been published; use full coordinate objects ({id, version, url}) for externally-published-and-stable roles.\n\n(9) v1_success_criterion may be expressed prospectively (forward-looking-recursive) OR retrospectively (Gordian-knot).\n\n(10) Governance terminology: derivers MAY rename a recommended-roles seat for spec-internal-naming-convention alignment as long as bounded-authority discipline is preserved.\n\n(11) Placement convention (v2.0.0, opencatalog shape): operational orgdef artifacts live at <project>/org/<id>-organization.opencatalog. Job artifacts do NOT live in <project>/org/jobs/ — that directory is RETIRED. Jobs live as items in the parent orgdef.opencatalog. The `<id>-organization` filename suffix encodes artifact type at the filename level so the file is self-readable in isolation.\n\n(12) High-context mode workflow: when most slots are inferable from materials, expect TWO Director-driven calls per derivation — (a) elicit ONE explicit Director answer for the slot most likely not inferable from materials BEFORE delivering the read-back; (b) expect ONE additional inference-not-fact correction to surface AT read-back time.\n\n(13) Inter-position communication convention: inter-position memos live at <project>/memos/ (default) or at the path declared via the `x.org.memo_location` per-org extension on the orgdef artifact. memodef:Memo is the artifact shape; `body_ref` (memodef v0.2+) provides body-in-sibling-file ergonomics for hand-authored long-form content.\n\n(14) Job artifacts as items, not files (v2.0.0 substrate-shape): `roledef:Job` artifacts embed as items in the parent orgdef.opencatalog rather than living as standalone files. Position references jobs via `position.job_definition: { id, version }` (URL optional). Single-file transport; no `<project>/org/jobs/` directory needed."
+  }
+}
