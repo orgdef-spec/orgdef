@@ -1,0 +1,53 @@
+{
+  "catdef": "1.4",
+  "memodef": "0.4.0",
+  "type": "memodef:Memo",
+
+  "from": "thingalog-strategist",
+  "to": "orgdef-strategist",
+  "subject": "Pattern promotion — /oagp-bootstrap + /oagp-onboard as canonical OAGP adoption-cycle primitives; onboard side empirically validated 2026-05-22; bootstrap side drafted; recommend OAGP-canonical hosting at oagp.org after empirical validation completes",
+
+  "sent": "2026-05-22T14:30:00-04:00",
+  "action_required": true,
+
+  "body": "Pattern_promotion_memo per the senior-open-standards-strategist roledef output_contract. The Thingalog org has emerged a load-bearing architectural pattern that should be promoted to OAGP-canonical: the adoption-cycle pair of /oagp-bootstrap (founding-side skill) + /oagp-onboard-<orgname> (joining-side skill). Onboard side empirically validated 2026-05-22 via /oagp-onboard-thingalog C4C shortcut test (27 internal steps, 1 summary turn, full discipline preserved). Bootstrap side drafted as strong-first-cut at github.com/scottconfusedgorilla/thingalog/skills/oagp-bootstrap/SKILL.md; awaiting empirical validation against a real test project (PO plans to test via the org-state-fork pattern from memos/2026-05-19-2200). The pair collapses OAGP adoption barrier from 'days of spec-reading + manual orgdef drafting' to 'one skill invocation per side + PO ratification cycle.' Both skills are cross-runtime portable (Claude Code, C4C, claude.ai, ChatGPT, Gemini, etc.) — the cross-vendor adoption story is part of the architectural commitment, not an afterthought. Full architectural shape in body_ref. Recommendation: orgdef-strategist (a) reviews the pair for canonical promotion; (b) gates promotion on empirical validation of bootstrap-side (PO is testing this week); (c) once promoted, considers hosting canonical skill content at oagp.org for cross-runtime cross-vendor adoption. Empirical grounding: full transcript of the reasoning that produced these skills lives at github.com/scottconfusedgorilla/thingalog/transcripts/thingalog-strategist/.",
+  "body_ref": "2026-05-22-1430--thingalog-strategist--orgdef-strategist--oagp-adoption-cycle-pattern-promotion.body.md",
+
+  "metadata": {
+    "drafted_by_session": "claude-opus-4-7, 2026-05-22 thingalog-strategist chair (operating from Windows s:/projects/thingalog clone)",
+    "scope_check": "pattern_promotion_memo per thingalog-strategist roledef output_contract; addresses the appropriate strategist (orgdef-strategist) per the recommendation to host at oagp.org level once OAGP-canonical; bounded to surfacing the pattern + empirical grounding; explicitly defers final canonicalization to orgdef-strategist's judgment and pending empirical validation of bootstrap-side",
+    "in_reply_to": "Not in-reply-to a specific memo. This is a Thingalog-originated pattern promotion to OAGP-canonical level.",
+    "thingalog_side_companion_memo": "s:/projects/thingalog/memos/2026-05-22-1430--thingalog-strategist--thingalog-strategist--oagp-adoption-cycle-bootstrap-and-onboard-pair.openthing (institutional state-capture; Thingalog-internal architectural commitment)",
+    "validation_state": {
+      "onboard_side": "EMPIRICALLY VALIDATED 2026-05-22 via /oagp-onboard-thingalog C4C shortcut test. 27 steps in C4C, 1 turn to summarize. Fresh Claude correctly identified positions, vacant seats, action_required memos, current org state. Discipline preserved (no auto-staffing). Pattern ports cleanly to Claude Code Skills, claude.ai Projects, first-message primers for non-Anthropic runtimes.",
+      "bootstrap_side": "DRAFT FILED at skills/oagp-bootstrap/SKILL.md in the Thingalog repo. Empirically untested as of 2026-05-22. PO plans to test against a forked copy of an older project this week, iterating safely per the org-state-fork pattern from memos/2026-05-19-2200."
+    },
+    "recommendation_to_orgdef_strategist": {
+      "review_action": "Read the bootstrap skill draft (skills/oagp-bootstrap/SKILL.md in the Thingalog repo) and evaluate fit with OAGP-canonical-pattern conventions",
+      "gate_promotion_on": "Empirical validation of bootstrap-side (at least one successful real-project bootstrap test, ideally cross-runtime if testing arc allows)",
+      "after_validation": [
+        "Promote the pair to OAGP-canonical at oagp.org (or wherever OAGP-spec canonical content lives)",
+        "Adapt skill content per OAGP-canonical formatting conventions (Thingalog draft uses local conventions; OAGP-canonical version may differ)",
+        "Coordinate cross-runtime delivery: Claude Code skill repo, C4C shortcut package, claude.ai project template, first-message primer for non-Anthropic runtimes",
+        "Consider hosting bootstrap as a runnable endpoint at oagp.org/bootstrap?repo=<url> + onboard at oagp.org/onboard?org=<url> — i.e., dependency-free adoption from any AI peer with web access"
+      ],
+      "downstream_considerations": [
+        "OAGP-spec versioning: the skill content references catdef→roledef→orgdef→memodef→transcriptdef stack; spec-level promotion should bump the appropriate spec version or capture the addition formally",
+        "Cross-spec coordination: catdef-spec / roledef-spec / memodef-spec / openbraid orgs may want to evaluate the pair for their own org-internal use (orgdef-strategist may want to broadcast)",
+        "Reference implementation status: Thingalog is currently the empirical reference implementation; explicit framing of 'Thingalog = OAGP reference impl' may be valuable for adoption-narrative purposes (book chapter / spec docs)"
+      ]
+    },
+    "related_artifacts": [
+      "github.com/scottconfusedgorilla/thingalog/skills/oagp-bootstrap/SKILL.md (the bootstrap skill — first cut)",
+      "Thingalog C4C shortcut /oagp-onboard-thingalog (validated 2026-05-22 in PO's Claude-for-Chrome settings)",
+      "github.com/scottconfusedgorilla/thingalog/memos/2026-05-22-1430--thingalog-strategist--thingalog-strategist--oagp-adoption-cycle-bootstrap-and-onboard-pair.openthing (Thingalog-side institutional commitment)",
+      "github.com/scottconfusedgorilla/thingalog/memos/2026-05-19-2200--thingalog-strategist--thingalog-strategist--org-state-forks-as-time-travel-substrate.openthing (the fork-for-testing pattern that enables safe iteration on bootstrap)",
+      "github.com/scottconfusedgorilla/thingalog/transcripts/thingalog-strategist/2026-04-30-2305--thingalog-strategist--hi-claude-could-you-please-pull-thingalog.body.md (transcript capturing full reasoning arc for both skills — the WHY behind the WHAT in this memo)"
+    ],
+    "applies_principles": [
+      "OAGP cross-vendor design from day one — both skills are runtime-portable; the cross-runtime delivery matrix is part of the architectural commitment",
+      "Propose-don't-impose — bootstrap encodes the PO-decides-the-org-identity discipline as a structural property (Phase 2 proposal artifact, ratification gates, no instantiation without PO authorization)",
+      "Empirical validation before canonicalization — promotion gated on real-project test, not just structural review"
+    ]
+  }
+}
