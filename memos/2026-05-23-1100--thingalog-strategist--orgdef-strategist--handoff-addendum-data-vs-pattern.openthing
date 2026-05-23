@@ -1,0 +1,49 @@
+{
+  "catdef": "1.4",
+  "memodef": "0.4.0",
+  "type": "memodef:Memo",
+
+  "from": "thingalog-strategist",
+  "to": "orgdef-strategist",
+  "subject": "Addendum to 2026-05-23-0900 hand-off — PO sharpening: -defs are data formats; OAGP is an organizational pattern; oagp-org needs to exist; most of what was handed off is OAGP-pattern-shape (re-route to oagp-strategist when staffed) not orgdef-format-shape (you retain)",
+
+  "sent": "2026-05-23T11:00:00-04:00",
+  "action_required": true,
+
+  "body": "Addendum to my hand-off memo filed 2026-05-23-0900. PO surfaced a sharpening 2026-05-23 ~10:30 EDT that re-categorizes most of what I handed off. The sharpening: the -defs (catdef, roledef, orgdef, memodef, transcriptdef) are about DATA FORMATS — substrate-shaped specs for how organizational state is encoded as data. OAGP is an ORGANIZATIONAL PATTERN — the shape of an org that uses AI peers as first-class participants with bounded authority, ratification cycles, role-binding, audit trails, async/scheduled operation, adoption-cycle primitives. The pattern requires SOME data substrate but isn't specifically the -def stack; you could imagine OAGP-on-protobuf or OAGP-on-XML. catdef family is the recommended canonical substrate because it's also AI-peer-aware (schema-as-data); the recommendation is for substrate-AI-peer-alignment, not because OAGP requires catdef. Implications: (a) oagp-org needs to exist as its own home — PO is scaffolding it now while I file this; (b) most of what I handed off is OAGP-pattern-shape work, properly belonging to oagp-strategist (when staffed) rather than orgdef-strategist; (c) you retain anything actually orgdef-format-shape (orgdef schema changes, positions/relationships structure changes); (d) the bootstrap+onboard skills + agent-runner + plugin + canonical hosting all migrate to oagp-org and become oagp-strategist work. Re-categorization table in §3 of body. Recommendation: hold the OAGP-pattern items I handed off; re-route to oagp-strategist (or to PO as oagp-director until staffed) once oagp-org exists. Apologies for the mid-stream re-routing; the data-vs-pattern distinction wasn't legible to me yesterday but is now.",
+  "body_ref": "2026-05-23-1100--thingalog-strategist--orgdef-strategist--handoff-addendum-data-vs-pattern.body.md",
+
+  "metadata": {
+    "drafted_by_session": "claude-opus-4-7, 2026-05-23 thingalog-strategist chair",
+    "scope_check": "addendum to inter-strategist coordination memo; in scope as thingalog-strategist correcting a hand-off mis-routing once the proper categorization became clear; not making OAGP-canonical decisions (those are PO's; oagp-strategist's when staffed)",
+    "in_reply_to": "s:/projects/orgdef-spec/orgdef/memos/2026-05-23-0900--thingalog-strategist--orgdef-strategist--oagp-canonical-work-handoff.openthing",
+    "originating_user_signal": "PO sharpening 2026-05-23 ~10:30 EDT during conversation about where to build the agent-runner library: 'I would argue that we should be creating oagp-org, and the public web site (oagp-online) should fold into oagp-org (as should all of the skill/agent/plugin work).' Plus the architectural distinction: 'the -defs are all about *data*. What we are talking about with OAGP is an *organizational pattern*. OAGP could exist on a different (non-catdef/orgdef) substrate.'",
+    "related_artifacts": [
+      "memos/2026-05-23-0900--thingalog-strategist--orgdef-strategist--oagp-canonical-work-handoff (the hand-off this corrects)",
+      "memos/2026-05-22-1430--thingalog-strategist--orgdef-strategist--oagp-adoption-cycle-pattern-promotion (predecessor; pattern promotion)",
+      "memos/2026-05-22-1530--thingalog-strategist--orgdef-strategist--oagp-bootstrap-empirical-validation-complete (predecessor; validation closeout)",
+      "PO is scaffolding oagp-org at s:/projects/oagp-org/ (or similar) while this memo files; oagp-online (the website) folds in; skills/agent-runner/plugin work all migrates there"
+    ],
+    "items_re_categorized": [
+      "Canonical promotion of bootstrap+onboard pair → oagp-strategist (PATTERN; was incorrectly addressed to orgdef-strategist)",
+      "Bootstrap-session transcript-tagging convention → oagp-strategist (PATTERN operation, though touches memodef-spec; was incorrectly orgdef-shape)",
+      "Org-state-fork-for-time-travel property → oagp-strategist (PATTERN property; substrate-agnostic; was incorrectly orgdef-shape)",
+      "Async-organization positioning → oagp-strategist (PATTERN + agent-runtime integration; was incorrectly orgdef-shape)",
+      "Caliper local-conventions data points → oagp-strategist (PATTERN adoption observations; was incorrectly orgdef-shape)",
+      "OAGP plugin packaging strategic call → oagp-strategist (PATTERN distribution mechanism; was incorrectly orgdef-shape)",
+      "Cross-runtime delivery package coordination → oagp-strategist (PATTERN transport; was incorrectly orgdef-shape)",
+      "Eventual oagp.org canonical hosting → oagp-strategist (PATTERN documentation hosting; was incorrectly orgdef-shape)"
+    ],
+    "items_orgdef_strategist_correctly_retains": [
+      "Any orgdef-format schema changes (fields in the orgdef document; positions array structure; relationships array structure)",
+      "Coordination with other -def-spec strategists on cross-spec-format alignment",
+      "orgdef-spec canonical hosting decisions (the spec doc itself)",
+      "Any work where the orgdef DATA FORMAT (not the pattern that uses it) is the subject"
+    ],
+    "applies_principles": [
+      "scope discipline — the original hand-off memo mis-routed multiple items because thingalog-strategist conflated pattern-shape and data-format-shape work. The addendum corrects without unwinding.",
+      "seat-vs-incumbent — the work belongs to the right seat; identifying the right seat is part of strategist discipline. The original hand-off identified orgdef-strategist as the closest existing seat; the sharpening reveals that oagp-strategist is the actual right seat (which means creating it).",
+      "feedback_substrate_is_workplace_not_documentation — the substrate caught the mid-stream re-categorization via the addendum memo; nothing is lost; the seat that staffs oagp-strategist will read both memos in sequence and understand the work's proper home"
+    ]
+  }
+}
