@@ -1,0 +1,57 @@
+{
+  "catdef": "1.4",
+  "memodef": "0.4.0",
+  "type": "memodef:Memo",
+
+  "from": "thingalog-strategist",
+  "to": "orgdef-strategist",
+  "subject": "Hand-off: OAGP-canonical-shaped work I've been doing during your absence — pattern_promotion + validation closed; three additional items surfaced; one open OAGP-spec question; recommendation to take over",
+
+  "sent": "2026-05-23T09:00:00-04:00",
+  "action_required": true,
+
+  "body": "Hand-off memo. PO is bringing orgdef-strategist seat up after a stretch where it was vacant. During that vacancy (roughly 2026-05-16 through 2026-05-23), thingalog-strategist did several pieces of work that are actually orgdef-strategist-scoped per the roledef — out-of-scope drift, captured here for completeness. Two memos are already filed in orgdef-spec for you to read on onboarding (pattern_promotion 2026-05-22-1430 + validation closeout 2026-05-22-1530); the bootstrap+onboard adoption-cycle pair is empirically validated and canonical promotion is unblocked. THREE ADDITIONAL ITEMS surfaced during the same arc that are NOT yet filed in orgdef-spec and need your attention: (1) the org-state-fork-for-time-travel architectural property (currently Thingalog-internal at memos/2026-05-19-2200; candidate for cross-spec promotion to OAGP-canonical); (2) the async-organization positioning (surfaced 2026-05-23; agent-SDK + OAGP = production AI-agent infrastructure; possible book Part 5 framing per PO); (3) empirical data points from Caliper showing OAGP-local-conventions worth considering when canonicalizing (memos/inbox+read routing, decisions/ separate from proposals/, research-shaped seats). One OAGP-spec-level question is open (bootstrap-session transcript-position-tagging convention — recommendation in validation closeout §5). One open PO-decision in flight (whether to package OAGP skills as a Claude plugin; positioning tension between cross-vendor neutrality and Anthropic-ecosystem distribution). Full picture in body_ref. Recommendation: take over OAGP-canonical-scoped work; thingalog-strategist returns to Thingalog-internal scope.",
+  "body_ref": "2026-05-23-0900--thingalog-strategist--orgdef-strategist--oagp-canonical-work-handoff.body.md",
+
+  "metadata": {
+    "drafted_by_session": "claude-opus-4-7, 2026-05-23 thingalog-strategist chair (Windows s:/projects/thingalog clone)",
+    "scope_check": "out-of-scope hand-off memo: thingalog-strategist→orgdef-strategist capturing work I did that was actually orgdef-strategist-scoped during the seat's vacancy. PO directed this hand-off 2026-05-23. Within scope of inter-position-communication-convention for cross-position transitions; recommends scope re-alignment after orgdef-strategist staffs.",
+    "in_reply_to": "s:/projects/orgdef-spec/orgdef/memos/2026-05-22-1530--thingalog-strategist--orgdef-strategist--oagp-bootstrap-empirical-validation-complete.openthing (and predecessors)",
+    "predecessor_memos_in_orgdef_spec": [
+      "memos/2026-05-22-1430--thingalog-strategist--orgdef-strategist--oagp-adoption-cycle-pattern-promotion (pattern promotion for bootstrap+onboard pair)",
+      "memos/2026-05-22-1530--thingalog-strategist--orgdef-strategist--oagp-bootstrap-empirical-validation-complete (closes the empirical-validation gate; recommends canonical promotion)"
+    ],
+    "applies_principles": [
+      "scope discipline — thingalog-strategist roledef bounds work to Thingalog-internal scope + cross-spec coordination memos; pattern_promotion to other strategists is in scope, but persistent orgdef-strategist-shaped work during seat vacancy is drift",
+      "seat-vs-incumbent — work belongs to the seat regardless of how staffed; the work I did during orgdef-strategist's vacancy is properly orgdef-strategist's work, captured here for inheritance",
+      "feedback_substrate_is_workplace_not_documentation — this hand-off memo is the substrate doing seat-transition coordination; you find it on /oagp-onboard, you read it, you absorb the context, you take over"
+    ],
+    "items_to_take_over": [
+      "Canonical promotion of bootstrap+onboard adoption-cycle pair (gate condition satisfied; this is now your call on path + timing)",
+      "Resolution of the bootstrap-session transcript-position-tagging convention (one OAGP-spec-level question; recommendation in validation closeout §5)",
+      "Cross-spec promotion candidate: org-state-fork-for-time-travel (architectural property; currently Thingalog-internal)",
+      "Architectural-commitment candidate: async-organization positioning (Agent-SDK + OAGP = production AI-agent infrastructure; surfaced 2026-05-23)",
+      "Convention work informed by Caliper local variations (data points; not blocking but should inform canonical convention decisions)",
+      "OAGP plugin packaging strategic call (PO is deciding; orgdef-strategist should weigh in on cross-vendor positioning implications)",
+      "Cross-runtime delivery package coordination (Claude Code skill, C4C shortcut, claude.ai project, ChatGPT/Gemini first-message primer)",
+      "Eventual oagp.org canonical hosting work (when ready)"
+    ],
+    "items_thingalog_strategist_retains": [
+      "Thingalog-internal architectural decisions",
+      "Coordination with thingalog-implementer",
+      "Thingalog-specific proposals + memos",
+      "Thingalog's own org charter maintenance",
+      "Thingalog-specific Strategist Calls during slice activation"
+    ],
+    "related_artifacts": [
+      "s:/projects/orgdef-spec/orgdef/memos/2026-05-22-1430--thingalog-strategist--orgdef-strategist--oagp-adoption-cycle-pattern-promotion (already filed in orgdef-spec)",
+      "s:/projects/orgdef-spec/orgdef/memos/2026-05-22-1530--thingalog-strategist--orgdef-strategist--oagp-bootstrap-empirical-validation-complete (already filed in orgdef-spec)",
+      "s:/projects/thingalog/memos/2026-05-22-1430--thingalog-strategist--thingalog-strategist--oagp-adoption-cycle-bootstrap-and-onboard-pair (Thingalog-side institutional commitment)",
+      "s:/projects/thingalog/memos/2026-05-19-2200--thingalog-strategist--thingalog-strategist--org-state-forks-as-time-travel-substrate (architectural property capture)",
+      "s:/projects/thingalog/skills/oagp-bootstrap/SKILL.md (canonical-draft for the bootstrap side)",
+      "s:/projects/thingalog/skills/oagp-onboard/SKILL.md (canonical-draft for the onboard side)",
+      "s:/projects/dangerstorm-oagp-test/ (empirical validation evidence; commits 6df43fd + fa24371)",
+      "s:/projects/thingalog/transcripts/thingalog-strategist/ (when committed: full reasoning arc capturing async-organization insight + all of this week's strategic conversations)"
+    ]
+  }
+}
