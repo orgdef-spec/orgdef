@@ -1,0 +1,43 @@
+{
+  "catdef": "1.4",
+  "memodef": "0.4.0",
+  "type": "memodef:Memo",
+
+  "from": "orgdef-strategist",
+  "to": "orgdef-strategist",
+  "subject": "Session closeout 2026-05-23 / 2026-05-24 — seat staffed; thingalog-strategist hand-off + addendum absorbed; 4 wrong-venue artifacts withdrawn; oagp-org scaffolded with org charter + CLAUDE.md + 2 inbox-pointer memos; SCHEMA v1.1.0 omnibus accepted and decision filed; 2 FYI memos to oagp-strategist; queue at closeout has 2 items blocked on oagp-strategist coordination + 2 lower-priority items + maintainer-scope build directive items pending; PO standing down until next week",
+
+  "sent": "2026-05-24T09:30:00-04:00",
+  "action_required": false,
+
+  "body": "Closeout for the orgdef-strategist session arc spanning 2026-05-23 ~07:00 EDT through 2026-05-24 ~09:30 EDT. Director ('Scott') directed close-of-session pickup-next-week 2026-05-24. This memo is the seat's state-capture for the next session — when next-orgdef-strategist runs /oagp-onboard against orgdef-spec, this memo is the inbox-top context. Three sections in body_ref: (1) session arc summary — what was accomplished and committed; (2) state at closeout — current queue with blocked/in-progress/lower-priority tagging; (3) pickup notes — what to do first next session, what gates exist, what to NOT re-litigate. action_required false because this is a self-addressed state-capture memo, not work for the seat to do; the queued WORK has its own action_required tagging per-item. Recommended onboarding sequence for the next session: read /oagp-onboard substrate; then this memo; then any new action_required memos that landed during the standdown.",
+  "body_ref": "2026-05-24-0930--orgdef-strategist--orgdef-strategist--session-closeout-2026-05-23-and-2026-05-24-pickup-notes.body.md",
+
+  "metadata": {
+    "drafted_by_session": "claude-opus-4-7, 2026-05-23 / 2026-05-24 orgdef-strategist chair (s:/projects/orgdef-spec)",
+    "scope_check": "self-addressed strategist closeout memo for seat-institutional-memory continuity across sessions; in scope as inter-position state-capture (seat-to-itself, addressed to the position so any future incumbent reads it on onboarding). No action by recipient; state-capture only.",
+    "in_reply_to": "Not in-reply-to a specific memo; this is the session-closeout artifact.",
+    "session_arc": {
+      "started": "2026-05-23 ~07:00 EDT (orgdef-strategist seat-staffing per Director direction)",
+      "ended": "2026-05-24 ~09:30 EDT (Director standdown direction)",
+      "wall_clock_span": "~26 hours real-time / ~3-4 hours active session work (intermittent)"
+    },
+    "commits_landed": {
+      "orgdef-spec": [
+        "0297e24 — Withdrawn-at-filing: 4 orgdef-strategist artifacts (2 proposals + 2 decisions) drafted before data-vs-pattern sharpening",
+        "7ae9958 — Inbox hygiene: file 4 thingalog-strategist memos to memos/read/",
+        "1722b73 — Decision: Accept orgdef SCHEMA v1.1.0 omnibus (P1-P9)"
+      ],
+      "oagp-org": [
+        "d185bb2 — Initial scaffolding: org charter v0.1.0, CLAUDE.md, README, substrate directories",
+        "4b7a20c — Inbox pointers: 2 cross-org reference memos from orgdef-strategist",
+        "27d4269 — FYI memos to oagp-strategist: SCHEMA v1.1.0 ship + cross-machine deployment signal"
+      ]
+    },
+    "applies_principles": [
+      "seat-vs-incumbent continuity — the seat persists across sessions; this memo carries institutional state forward",
+      "substrate-as-workplace — closeout-memo-to-the-seat IS the substrate doing the work of cross-session continuity",
+      "next-session-onboarding-via-substrate — the next orgdef-strategist runs /oagp-onboard and finds this memo at inbox-top; should be sufficient to continue without conversation context"
+    ]
+  }
+}
